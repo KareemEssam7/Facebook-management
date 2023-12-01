@@ -1,0 +1,7 @@
+friend suggestions
+
+bfs one level deeper and store all those nodes ( your friends) and then store the frequencies of all nodes one level deeper than your friends and then suggest according to the
+highest frequency node to the lowest.
+
+Post propagation ( restricted people and stuff ) 
+Work in progress

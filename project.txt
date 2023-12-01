@@ -1,0 +1,28 @@
+Users
+
+john_doe,john.doe@email.com,25,male,[1,23,5,61,23,]
+
+
+Post
+// post id , user id ,tagsId, content , reactors id , comment id , 
+id , UserId,"content",[1,2,3,4],[1,2,3,4],[1,2,3,4,4]
+
+// comment
+
+// commentid , user id , reactorid, replyid `
+
+id , userId, content, [1,2,3,4,5] , [1,2,3,4]
+
+
+// replies 
+
+// replyid , userid, reactorid
+
+id, userId, [1,2,3,4]
+
+// conversation 
+// id , messages id [1,2,2,,3,3,3,],usersid [1,2,2,3,,3,4,44]
+
+// messages
+
+messageId, ConversationId, SenderId
