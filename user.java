@@ -9,7 +9,7 @@ public class user {
     // waiting for date data type
     String Birthdate;
     Set<Integer> posts = new HashSet<Integer>();
-    Vector<Conversation> conversations;
+    Vector<Long> userConvs;
     static int userCount = 0;
     int id;
     Set<Integer> friends = new HashSet<Integer>();
@@ -99,5 +99,13 @@ public class user {
         Post test = new Post(content);
         FBsystem.posts.put(test.id, test);
         this.posts.add(test.id);
+    }
+    void MakeConversation(Vector<user> users){
+        Conversation newconv = new Conversation(users);
+        userConvs.add(newconv.uniqueID);
+        FBsystem.conversations.put(newconv.uniqueID, newconv);
+    }
+    void SendMessage(String content,int conversationId){
+        message msg = new message(content, conversationId, this.id);
     }
 }
