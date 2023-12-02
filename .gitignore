@@ -7,3 +7,5 @@ message.class
 Post.class
 Reply.class
 user.class
+CustomStructures/JoinedList.class
+CustomStructures/Node.class

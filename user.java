@@ -85,19 +85,19 @@ public class user {
 
     void addReply(comment com, String reply) {
         Reply test = new Reply(reply);
-        FBsystem.Replies.put(test.id, test);
+        FBsystem.Replies.pushBack(test);
         com.ReplyId.add(test.id);
     }
 
     void addComment(Post post, String com) {
         comment test = new comment(com);
-        FBsystem.Comments.put(test.id, test);
+        FBsystem.Comments.pushBack(test);
         post.CommentId.add(test.id);
     }
 
     void CreatePost(String content) {
         Post test = new Post(content);
-        FBsystem.posts.put(test.id, test);
+        FBsystem.posts.pushBack(test);
         this.posts.add(test.id);
     }
     void MakeConversation(Vector<user> users){
