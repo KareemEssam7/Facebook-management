@@ -21,6 +21,7 @@ public class networkNavigation {
      */
 
     private int depth;
+    private int userID;
 
     TreeMap<Integer ,Integer> level = new TreeMap<>();
 
@@ -29,6 +30,7 @@ public class networkNavigation {
     public networkNavigation(int userId, int depth){
         
         this.depth = depth;
+        this.userID = userId;
         level.put(userId, 0);
 
         currUserFriends = FBsystem.users.get(userId).friends;
@@ -39,7 +41,7 @@ public class networkNavigation {
 
     }
 
-    TreeSet<Tuple> BFS(){
+    TreeSet<Tuple> Search(){
 
         TreeSet<Tuple> ret = new TreeSet<Tuple>();
 
@@ -60,7 +62,9 @@ public class networkNavigation {
 
                 int currlevel = level.get(currUser);
 
-                if(!level.containsKey(child)){
+                boolean check = FBsystem.users.get(userID).blockedUsers.get(child);
+                
+                if(check != true && !level.containsKey(child)){
 
                     if(currlevel < 1 + depth){
 
@@ -79,7 +83,7 @@ public class networkNavigation {
                         }
                     }
                 }else{
-                    if(level.get(child) > currlevel){
+                    if(check != true && level.get(child) > currlevel){
                         int last = userFreq.get(child);
                             userFreq.remove(child);
                             userFreq.put(child, last + 1);
