@@ -9,7 +9,7 @@ public class user {
     // waiting for date data type
     String Birthdate;
     Set<Integer> posts = new HashSet<Integer>();
-    Vector<Long> userConvs;
+    Set<Long> userConvs = new HashSet<Long>();
     static int userCount = 0;
     int id;
     Set<Integer> friends = new HashSet<Integer>();
@@ -100,12 +100,22 @@ public class user {
         FBsystem.posts.pushBack(test);
         this.posts.add(test.id);
     }
-    void MakeConversation(Vector<user> users){
-        Conversation newconv = new Conversation(users);
-        userConvs.add(newconv.uniqueID);
+    void MakeConversation(Vector<Integer> usersID){
+        Conversation newconv = new Conversation(usersID);
+        for (int i = 0; i < usersID.size(); i++) {
+            FBsystem.users.get(usersID.get(i)).userConvs.add(newconv.uniqueID);
+        }
         FBsystem.conversations.put(newconv.uniqueID, newconv);
     }
-    void SendMessage(String content,int conversationId){
-        message msg = new message(content, conversationId, this.id);
+    void SendMessage(String content,Long conversationId){
+        message msg = new message(content, this.id, conversationId);
+        FBsystem.conversations.get(conversationId).messages.put(msg.messageID, msg);
+    }
+    void LeaveConversation(Long convID){
+        this.userConvs.remove(convID);
+        FBsystem.conversations.get(convID).participantsID.remove(this.id);
+        if(FBsystem.conversations.get(convID).participantsID.size() == 0){
+            FBsystem.conversations.remove(convID);
+        }
     }
 }
