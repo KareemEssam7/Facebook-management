@@ -13,6 +13,8 @@ public class user {
     static int userCount = 0;
     int id;
     Set<Integer> friends = new HashSet<Integer>();
+    BitSet restrictedUsers = new BitSet();
+    BitSet blockedUsers = new BitSet();
 
     user(String email, String name, String password, char gender, String Birthdate) {
         userCount++;
@@ -40,7 +42,7 @@ public class user {
         FBsystem.users.get(friend.id).addFriend(this, false);
     }
 
-    void removeFriend(user friend, Boolean check) {
+    void removeFriend(int userID, Boolean check) {
         // id of friend and his info
         // set<pair<id,user>>s;
         // s.erase(s.lower_bound({id,friend}));
@@ -52,10 +54,10 @@ public class user {
          * 
          */
         //
-        friends.remove(friend.id);
+        friends.remove(userID);
     }
 
-    void removeFriend(user friend) {
+    void removeFriend(int userID) {
         // id of friend and his info
         // set<pair<id,user>>s;
         // s.erase(s.lower_bound({id,friend}));
@@ -67,8 +69,8 @@ public class user {
          * 
          */
         //
-        friends.remove(friend.id);
-        FBsystem.users.get(friend.id).removeFriend(this, false);
+        friends.remove(userID);
+        FBsystem.users.get(userID).removeFriend(this.id, false);
     }
 
     void like(comment com) {
@@ -108,4 +110,24 @@ public class user {
     void SendMessage(String content,int conversationId){
         message msg = new message(content, conversationId, this.id);
     }
+
+    void restrictUser(int userID){
+        restrictedUsers.set(userID);
+    }
+
+    void unrestrictUser(int userID){
+        restrictedUsers.clear(userID);
+    }
+
+    void block(int userID){
+        if(FBsystem.users.get(this.id).friends.contains(userID)){
+            removeFriend(userID);
+        }
+        blockedUsers.set(userID, true);
+    }
+
+    void unblock(int userID){
+        blockedUsers.set(userID, false);
+    }
+
 }
