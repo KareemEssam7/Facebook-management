@@ -1,4 +1,8 @@
 import CustomStructures.*;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Vector;
 class main {
     public static void main(String[] args) {
 
@@ -9,18 +13,33 @@ class main {
         user tmp5 = new user("FraudHatem@gmail.com", "kareem", "kareem123", 'M', "5/5/5");
         user tmp6 = new user("joon@gmail.com", "yehia", "yehia123", 'D', "6/6/6");
         user tmp7 = new user("kareemessam@gmail.com", "kareem", "kareem123", 'M', "7/7/7");
-        tmp2.addFriend(tmp3);
-        tmp2.addFriend(tmp4);
-        System.out.println(tmp3.friends.size());
-        tmp2.removeFriend(tmp3);
-        System.out.println(tmp3.friends.size());
-        System.out.println(tmp2.friends.size());
-        tmp2.CreatePost("test");
-        for (Node<Post> it = FBsystem.posts.iteratorToStart(); it != null; it = FBsystem.posts.nextValue()) {
-            System.out.println(it.value().content);
-            System.out.println(it.value().ReactorsID.size());
-            tmp4.like(it.value());
-            System.out.println(it.value().ReactorsID.size());
-        }
+        // tmp2.addFriend(tmp3);
+        // tmp2.addFriend(tmp4);
+        // System.out.println(tmp3.friends.size());
+        // tmp2.removeFriend(tmp3);
+        // System.out.println(tmp3.friends.size());
+        // System.out.println(tmp2.friends.size());
+        // tmp2.CreatePost("test");
+        // for (Node<Post> it = FBsystem.posts.iteratorToStart(); it != null; it = FBsystem.posts.nextValue()) {
+        //     System.out.println(it.value().content);
+        //     System.out.println(it.value().ReactorsID.size());
+        //     tmp4.like(it.value());
+        //     System.out.println(it.value().ReactorsID.size());
+        // }
+        Vector<Integer> v = new Vector<>();
+        v.add(tmp.id);
+        v.add(tmp2.id);
+        v.add(tmp3.id);
+        tmp.MakeConversation(v);
+        System.out.println(FBsystem.conversations.get(1L).participantsID.size());
+        System.out.println(FBsystem.conversations.get(1L).messagesCnt);
+        tmp.SendMessage("Test123", 1L);
+        System.out.println(FBsystem.conversations.get(1L).messagesCnt);
+        tmp.LeaveConversation(1L);
+        System.out.println(FBsystem.conversations.get(1L).participantsID.size());
+        tmp2.LeaveConversation(1L);
+        System.out.println(FBsystem.conversations.get(1L).participantsID.size());
+        tmp3.LeaveConversation(1L);
+        System.out.println(FBsystem.conversations.size());
     }
 }
