@@ -19,12 +19,12 @@ public class Conversation {
     }
 
     void addParticipants(user User) {
-        participantsID.add(User.id);
+        participantsID.add(User.getId());
     }   
 
     void addParticipants(Vector<user> v) {
         for (int i = 0; i < v.size(); i++) {
-            participantsID.add(v.get(i).id);
+            participantsID.add(v.get(i).getId());
         }
     }
 }
