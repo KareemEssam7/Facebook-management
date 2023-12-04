@@ -4,14 +4,14 @@ import java.util.*;
 public class user {
     String email;
     String name;
-    String password;
+    private String password;
     char gender;
     // waiting for date data type
     String Birthdate;
     Set<Integer> posts = new HashSet<Integer>();
     Set<Long> userConvs = new HashSet<Long>();
     static int userCount = 0;
-    int id;
+    private final int id;
     Set<Integer> friends = new HashSet<Integer>();
     BitSet restrictedUsers = new BitSet();
     BitSet blockedUsers = new BitSet();
@@ -138,6 +138,15 @@ public class user {
 
     void unblock(int userID){
         blockedUsers.set(userID, false);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    //compares a given password with the user's password
+    boolean comparePassword(String toCompare) {
+        return toCompare.equals(password);
     }
 
 }
