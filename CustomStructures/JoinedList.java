@@ -1,4 +1,5 @@
 package CustomStructures;
+
 public class JoinedList<T> {
     private Node<T> startNode = null;
     private Node<T> endNode = null;
@@ -6,7 +7,7 @@ public class JoinedList<T> {
     boolean reversedIteration = false;
 
     public void pushBack(T data) {
-        if(startNode == null) {
+        if (startNode == null) {
             startNode = new Node<T>(data);
             endNode = startNode;
             return;
@@ -16,8 +17,9 @@ public class JoinedList<T> {
         endNode.setBack(temp);
         endNode = temp;
     }
+
     public void pushFront(T data) {
-        if(startNode == null) {
+        if (startNode == null) {
             startNode = new Node<T>(data);
             endNode = startNode;
             return;
@@ -29,12 +31,12 @@ public class JoinedList<T> {
     }
 
     public Node<T> deleteNode(Node<T> node) {
-        if(startNode == node)
+        if (startNode == node)
             startNode = startNode.back();
-        if(endNode == node)
+        if (endNode == node)
             endNode = endNode.front();
-        if(node == iteratorNode) {
-            if(reversedIteration)
+        if (node == iteratorNode) {
+            if (reversedIteration)
                 iteratorNode = iteratorNode.front();
             else
                 iteratorNode = iteratorNode.back();
@@ -60,16 +62,15 @@ public class JoinedList<T> {
     }
 
     public Node<T> nextValue() {
-        if(reversedIteration) {
-            if(iteratorNode == null)
+        if (reversedIteration) {
+            if (iteratorNode == null)
                 return iteratorNode = endNode;
-        
+
             return iteratorNode = iteratorNode.front();
-        }
-        else {
-            if(iteratorNode == null)
+        } else {
+            if (iteratorNode == null)
                 return iteratorNode = startNode;
-            
+
             return iteratorNode = iteratorNode.back();
         }
     }
