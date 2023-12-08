@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.*;
+import CustomStructures.*;
 
 public class user {
     String email;
@@ -7,14 +8,14 @@ public class user {
     private String password;
     char gender;
     String Birthdate;
-    Set<Integer> posts = new HashSet<Integer>();
+    public JoinedList<Integer> posts = new JoinedList<Integer>();
     Set<Long> userConvs = new HashSet<Long>();
     static int userCount = 0;
     private final int id;
     Set<Integer> friends = new HashSet<Integer>();
     BitSet restrictedUsers = new BitSet();
     BitSet blockedUsers = new BitSet();
-    Set<Integer> feedId = new HashSet<Integer>();
+    public JoinedList<Integer> feed = new JoinedList<Integer>();
 
     user(String email, String name, String password, char gender, String Birthdate) {
         userCount++;
@@ -58,30 +59,32 @@ public class user {
     }
 
     void addReply(comment com, String reply) {
-        Reply test = new Reply(reply);
-        FBsystem.Replies.pushBack(test);
-        com.ReplyId.add(test.id);
+        Reply newReply = new Reply(reply);
+        com.Replies.pushBack(newReply);
     }
 
     void addComment(Post post, String com) {
-        comment test = new comment(com);
-        FBsystem.Comments.pushBack(test);
-        post.CommentId.add(test.id);
+        comment newComment = new comment(com);
+       post.Comments.pushBack(newComment);
     }
 
     void CreatePost(String content, char privacy) {
-        Post test = new Post(content, privacy);
-        FBsystem.posts.pushBack(test);
-        this.posts.add(test.id);
+        Post newPost = new Post(content, privacy);
+        FBsystem.posts.put(newPost.id, newPost);
+        posts.pushBack(newPost.id);
         for (Integer Cur : friends) {
             Boolean Restricted = restrictedUsers.get(Cur);
             if (Restricted && privacy == '-')
                 continue;
-            FBsystem.users.get(Cur).feedId.add(test.id);
+            FBsystem.users.get(Cur).feed.pushBack(newPost.id);
         }
-        for (Integer tagged : test.TaggedId) {
-            FBsystem.users.get(tagged).feedId.add(test.id);
+        for (Integer tagged : newPost.TaggedId) {
+            FBsystem.users.get(tagged).feed.pushBack(newPost.id);
         }
+    }
+    void deletePost(Node<Integer> post) {
+          FBsystem.posts.remove(post.value());
+          posts.deleteNode(post);
     }
 
     void MakeConversation(Vector<Integer> usersID) {
@@ -104,14 +107,18 @@ public class user {
             FBsystem.conversations.remove(convID);
         }
     }
-
+    // hidden easteregg
     void restrictUser(int userID) {
         restrictedUsers.set(userID);
-        for (Integer myPost : posts) {
-            // add condition to check if post is restricted then
-            if (FBsystem.users.get(userID).feedId.contains(myPost)) {
-                FBsystem.users.get(userID).feedId.remove(myPost);
-            }
+        JoinedList<Integer> userPostList = FBsystem.users.get(userID).feed;
+        Node<Integer> p = userPostList.iteratorToStart();
+        while (p != null) {
+            Post cur=FBsystem.posts.get(p.value());
+            if( cur==null || (cur.privacy=='-' && cur.userId == this.id) )
+                p = userPostList.deleteNode(p);
+            else
+                p = userPostList.nextValue();
+            
         }
     }
 
@@ -123,10 +130,15 @@ public class user {
         if (FBsystem.users.get(this.id).friends.contains(userID)) {
             removeFriend(userID);
         }
-        for (Integer myPost : posts) {
-            if (FBsystem.users.get(userID).feedId.contains(myPost)) {
-                FBsystem.users.get(userID).feedId.remove(myPost);
-            }
+          JoinedList<Integer> userPostList = FBsystem.users.get(userID).feed;
+        Node<Integer> p = userPostList.iteratorToStart();
+        while (p != null) {
+            Post cur=FBsystem.posts.get(p.value());
+            if( cur==null || cur.userId == this.id )
+                p = userPostList.deleteNode(p);
+            else
+                p = userPostList.nextValue();
+            
         }
         blockedUsers.set(userID, true);
     }

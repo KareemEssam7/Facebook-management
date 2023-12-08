@@ -105,22 +105,15 @@ class main {
         khater.addFriend(kareem);
         kareem.addFriend(wisdom);
         joon.addFriend(mahrous);
-
+        mahrous.addFriend(kareem);
+        
+        jiangly.block(mahrous.getId());
         jiangly.block(amany.getId());
         jiangly.unblock(amany.getId());
         // jiangly.block(ayman.getId());
         jiangly.restrictUser(khater.getId());
         jiangly.CreatePost("Cats are really good", '+');
         jiangly.CreatePost("cats are bad", '-');
-        Node<Post> p = FBsystem.posts.iteratorToStart();
-        while (p != null) {
-            for (Integer fe : FBsystem.users.get(ayman.getId()).feedId) {
-                if (fe == p.value().id) {
-                    System.out.println(p.value().content);
-                }
-            }
-            p = FBsystem.posts.nextValue();
-        }
-
+    
     }
 }

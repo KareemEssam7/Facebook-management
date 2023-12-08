@@ -12,9 +12,7 @@ public class FBsystem {
     public static HashMap<Integer, user> users = new HashMap<Integer, user>();
     public static HashMap<Long, Conversation> conversations = new HashMap<Long, Conversation>();
     public static HashMap<String, Integer> accounts = new HashMap<String, Integer>();
-    public static JoinedList<Post> posts = new JoinedList<Post>();
-    public static JoinedList<Reply> Replies = new JoinedList<Reply>();
-    public static JoinedList<comment> Comments = new JoinedList<comment>();
+    public static HashMap<Integer, Post> posts = new HashMap<Integer, Post>();
     private final static String emailConstraints = "^(?=.{1,64}@)[A-Za-z\\d_-]+(\\.[A-Za-z\\d_-]+)*@[A-Za-z\\d][A-Za-z\\d-]+(\\.[A-Za-z\\d-]+)*(\\.[A-Za-z]{2,})$";
     private final static String passwordConstraints = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*\\p{Punct})[A-Za-z\\d\\p{Punct}]{8,32}$";
     private final static String nameConstraints = "^[A-Za-z]{3,10}(\\s [A-Za-z]{3,10})?$";
