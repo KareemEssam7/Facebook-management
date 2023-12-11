@@ -59,17 +59,17 @@ public class user {
     }
 
     void addReply(comment com, String reply) {
-        Reply newReply = new Reply(reply);
+        Reply newReply = new Reply(reply, id);
         com.Replies.pushBack(newReply);
     }
 
     void addComment(Post post, String com) {
-        comment newComment = new comment(com);
+        comment newComment = new comment(com,id);
        post.Comments.pushBack(newComment);
     }
 
-    void CreatePost(String content, char privacy) {
-        Post newPost = new Post(content, privacy);
+    void CreatePost(String content, char privacy, Vector<Integer> TaggedId) {
+        Post newPost = new Post(content, privacy, id,TaggedId);
         FBsystem.posts.put(newPost.id, newPost);
         posts.pushBack(newPost.id);
         for (Integer Cur : friends) {
@@ -155,6 +155,11 @@ public class user {
     // compares a given password with the user's password
     boolean comparePassword(String toCompare) {
         return toCompare.equals(password);
+    }
+    
+    //saves password to file
+    public void savePassword(FileWriter writer) throws IOException {
+        writer.write(password);
     }
 
 }

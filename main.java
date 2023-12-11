@@ -1,5 +1,7 @@
 import CustomStructures.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
@@ -99,6 +101,7 @@ class main {
         // System.out.println(vc.get(1));
         jiangly.addFriend(ayman);
         jiangly.addFriend(khater);
+        jiangly.addFriend(amany);
         ayman.addFriend(amany);
         khater.addFriend(amany);
         amany.addFriend(wisdom);
@@ -108,12 +111,20 @@ class main {
         mahrous.addFriend(kareem);
         
         jiangly.block(mahrous.getId());
-        jiangly.block(amany.getId());
-        jiangly.unblock(amany.getId());
-        // jiangly.block(ayman.getId());
-        jiangly.restrictUser(khater.getId());
-        jiangly.CreatePost("Cats are really good", '+');
-        jiangly.CreatePost("cats are bad", '-');
+        //jiangly.block(amany.getId());
+       // jiangly.unblock(amany.getId());
+        jiangly.block(ayman.getId());
+        jiangly.CreatePost("Cats are really good", '+', new Vector<Integer>());
+        jiangly.CreatePost("cats are bad", '-',new Vector<Integer>());
+        amany.addComment(FBsystem.posts.get(amany.feed.getStartNode().value()), "i hate kareem essam");
+        khater.addReply(FBsystem.posts.get(amany.feed.getStartNode().value()).Comments.getStartNode().value(),"i love segment tree");
+        try {
+            FileHandler.save();
+            System.out.println("meow");
+        }
+        catch (IOException e) {
+            System.out.println("FAIL");
+        }
     
     }
 }
