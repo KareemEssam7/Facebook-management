@@ -36,7 +36,7 @@
                   <Font size="18.0" />
                </font>
             </PasswordField>
-            <Button layoutX="230.0" layoutY="307.0" mnemonicParsing="false" onAction="#registerButtonAction" prefHeight="45.0" prefWidth="120.0" style="-fx-background-radius: 5;" text="Register">
+            <Button layoutX="230.0" layoutY="307.0" mnemonicParsing="false"onAction="#swap" prefHeight="45.0" prefWidth="120.0" style="-fx-background-radius: 5;" text="Register">
                <font>
                   <Font size="20.0" />
                </font>
@@ -46,7 +46,7 @@
                   <Font name="Google Sans Medium" size="31.0" />
                </font>
             </Text>
-            <Button layoutX="90.0" layoutY="307.0" mnemonicParsing="false" onAction="#loginButtonAction" prefHeight="45.0" prefWidth="120.0" style="-fx-background-radius: 5;" text="Login">
+            <Button layoutX="90.0" layoutY="307.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="120.0" style="-fx-background-radius: 5;" text="Login" onAction="#loginButtonAction">
                <font>
                   <Font size="20.0" />
                </font>
