@@ -15,34 +15,34 @@
 
 <StackPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: INDIGO;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.LoginController">
    <children>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="440.0" prefWidth="440.0" style="-fx-background-radius: 15; -fx-background-color: WHITE;" StackPane.alignment="CENTER">
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="560.0" prefWidth="500.0" style="-fx-background-radius: 15; -fx-background-color: WHITE;" StackPane.alignment="CENTER">
          <children>
-            <TextField fx:id="usernameField" layoutX="70.0" layoutY="114.0" prefHeight="40.0" prefWidth="280.0" promptText="Email">
+            <TextField fx:id="usernameField" layoutX="107.0" layoutY="86.0" prefHeight="40.0" prefWidth="280.0" promptText="Email">
                <font>
                   <Font size="18.0" />
                </font>
             </TextField>
-            <PasswordField fx:id="passwordField" layoutX="70.0" layoutY="220.0" prefHeight="40.0" prefWidth="280.0" promptText="Password">
+            <PasswordField fx:id="passwordField" layoutX="106.0" layoutY="189.0" prefHeight="40.0" prefWidth="280.0" promptText="Password">
                <font>
                   <Font size="18.0" />
                </font>
             </PasswordField>
-            <Button layoutX="230.0" layoutY="373.0" mnemonicParsing="false" onAction="#registerButtonAction" prefHeight="45.0" prefWidth="120.0" style="-fx-background-radius: 5;" text="Register">
+            <Button layoutX="266.0" layoutY="477.0" mnemonicParsing="false" onAction="#registerButtonAction" prefHeight="45.0" prefWidth="120.0" style="-fx-background-radius: 5;" text="Register">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Text layoutX="164.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Register">
+            <Text layoutX="190.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Register">
                <font>
                   <Font name="Google Sans Medium" size="31.0" />
                </font>
             </Text>
-            <TextField fx:id="usernameField1" layoutX="70.0" layoutY="168.0" prefHeight="40.0" prefWidth="280.0" promptText="Name">
+            <TextField fx:id="usernameField1" layoutX="107.0" layoutY="136.0" prefHeight="40.0" prefWidth="280.0" promptText="Name">
                <font>
                   <Font size="18.0" />
                </font>
             </TextField>
-            <RadioButton layoutX="70.0" layoutY="287.0" mnemonicParsing="false" text="Male">
+            <RadioButton layoutX="107.0" layoutY="400.0" mnemonicParsing="false" text="Male">
                <font>
                   <Font name="Open Sans Medium" size="12.0" />
                </font>
@@ -50,13 +50,28 @@
                   <ToggleGroup fx:id="gender" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton layoutX="70.0" layoutY="317.0" mnemonicParsing="false" text="Female" toggleGroup="$gender" />
-            <DatePicker layoutX="175.0" layoutY="275.0" />
-            <Button layoutX="69.0" layoutY="373.0" mnemonicParsing="false" onAction="#swap2" prefHeight="45.0" prefWidth="120.0" style="-fx-background-radius: 5;" text="Back">
+            <RadioButton layoutX="187.0" layoutY="400.0" mnemonicParsing="false" text="Female" toggleGroup="$gender" />
+            <DatePicker layoutX="107.0" layoutY="335.0" />
+            <Button layoutX="107.0" layoutY="477.0" mnemonicParsing="false" onAction="#swap2" prefHeight="45.0" prefWidth="120.0" style="-fx-background-radius: 5;" text="Back">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
+            <PasswordField fx:id="passwordField1" layoutX="106.0" layoutY="240.0" prefHeight="40.0" prefWidth="280.0" promptText="Confirm Password">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </PasswordField>
+            <Text layoutX="107.0" layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gender" wrappingWidth="119.99999999999989">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <Text layoutX="107.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of Birth" wrappingWidth="119.99999999999989">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
          </children>
          <effect>
             <DropShadow blurType="GAUSSIAN" height="100.0" radius="49.5" width="100.0">
