@@ -36,7 +36,7 @@
                   <Font size="18.0" />
                </font>
             </PasswordField>
-            <Button layoutX="230.0" layoutY="307.0" mnemonicParsing="false"onAction="#swap" prefHeight="45.0" prefWidth="120.0" style="-fx-background-radius: 5;" text="Register">
+            <Button layoutX="230.0" layoutY="307.0" mnemonicParsing="false" onAction="#swap" prefHeight="45.0" prefWidth="120.0" style="-fx-background-radius: 5;" text="Register">
                <font>
                   <Font size="20.0" />
                </font>
