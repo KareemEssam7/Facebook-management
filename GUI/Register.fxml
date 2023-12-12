@@ -27,7 +27,7 @@
                   <Font size="18.0" />
                </font>
             </PasswordField>
-            <Button layoutX="150.0" layoutY="373.0" mnemonicParsing="false" onAction="#registerButtonAction" prefHeight="45.0" prefWidth="120.0" style="-fx-background-radius: 5;" text="Register">
+            <Button layoutX="230.0" layoutY="373.0" mnemonicParsing="false" onAction="#registerButtonAction" prefHeight="45.0" prefWidth="120.0" style="-fx-background-radius: 5;" text="Register">
                <font>
                   <Font size="20.0" />
                </font>
@@ -52,6 +52,11 @@
             </RadioButton>
             <RadioButton layoutX="70.0" layoutY="317.0" mnemonicParsing="false" text="Female" toggleGroup="$gender" />
             <DatePicker layoutX="175.0" layoutY="275.0" />
+            <Button layoutX="69.0" layoutY="373.0" mnemonicParsing="false" onAction="#swap2" prefHeight="45.0" prefWidth="120.0" style="-fx-background-radius: 5;" text="Back">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
          </children>
          <effect>
             <DropShadow blurType="GAUSSIAN" height="100.0" radius="49.5" width="100.0">
