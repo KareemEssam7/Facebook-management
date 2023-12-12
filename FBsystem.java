@@ -16,7 +16,7 @@ public class FBsystem {
     private final static String emailConstraints = "^(?=.{1,64}@)[A-Za-z\\d_-]+(\\.[A-Za-z\\d_-]+)*@[A-Za-z\\d][A-Za-z\\d-]+(\\.[A-Za-z\\d-]+)*(\\.[A-Za-z]{2,})$";
     private final static String passwordConstraints = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*\\p{Punct})[A-Za-z\\d\\p{Punct}]{8,32}$";
     private final static String nameConstraints = "^[A-Za-z]{3,10}(\\s [A-Za-z]{3,10})?$";
-
+    
     // function to hash strings using sha3-256 and returns it as a base-64 string.
     public static String hashString(String stringToHash) {
         try {
@@ -25,7 +25,6 @@ public class FBsystem {
                     stringToHash.getBytes(StandardCharsets.UTF_8));
             return Base64.getEncoder().encodeToString(hashedBytes);
         } catch (NoSuchAlgorithmException e) {
-            System.out.println("Unable to hash, algorithm undefined");
             return null;
         }
     }
@@ -53,7 +52,9 @@ public class FBsystem {
     // successfully and returns one of the following error codes otherwise:
     // 1: invalid E-mail.
     // 2: Invalid/Weak Password.
-    // 3: E-mail already taken.
+    // 3: Invalid Name
+    // 4: E-mail already taken.
+    // -2: Hashing Error! Algorithm Undefined.
     public static byte Register(String email, String name, String password, char gender, String birthdate) {
         if (!validEmail(email))
             return 1;
@@ -62,7 +63,9 @@ public class FBsystem {
         if (!validName(name))
             return 3;
         if (!accounts.containsKey(email)) {
-            String hashedPassword = new String(hashString(password));
+            String hashedPassword = hashString(password);
+            if(hashedPassword == null)
+                return -2;
             user newUser = new user(email, name, hashedPassword, gender, birthdate);
             users.put(newUser.getId(), newUser);
             accounts.put(email, newUser.getId());
@@ -72,15 +75,27 @@ public class FBsystem {
         return 4;
     }
 
-    // allows currently registered users to login, reutrns the user id if the login
-    // was successful, and -1 otherwise.
+    // allows currently registered users to login, reutrns the user id if the login was successful
+    //-1 when email/password don't match.
+    //-2 Hashing Error, Algorithm Not Found
     public static int Login(String email, String password) {
         if (!accounts.containsKey(email))
             return -1;
-        String hashedPassword = new String(hashString(password));
+        String hashedPassword = hashString(password);
+        if(hashedPassword == null)
+            return -2;
         if (users.get(accounts.get(email)).comparePassword(hashedPassword)) {
             return users.get(accounts.get(email)).getId();
         } else
             return -1;
+    }
+
+    public static int charCount(char c, String s) {
+        int ctr = 0;
+        for(int i = 0; i < s.length(); i++) {
+            if(s.charAt(i) == c)
+                ctr++;
+        }
+        return ctr;
     }
 }
