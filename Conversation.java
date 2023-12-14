@@ -4,14 +4,21 @@ import java.util.*;
 public class Conversation {
     static long id = 0;
     long uniqueID;
-    Set<Long>messagesID = new HashSet<Long>();
     HashMap<Long, message> messages = new HashMap<Long, message>();
     Set<Integer> participantsID = new HashSet<Integer>();
     long messagesCnt;
 
     Conversation(Vector<Integer> par) {
-        id++;
         uniqueID = id;
+        id++;
+        for (int i = 0; i < par.size(); i++) {
+            participantsID.add(par.get(i));
+        }
+        this.messagesCnt = 0;
+    }
+    Conversation(Vector<Integer> par,int convoId) {
+        uniqueID = convoId;
+        id++;
         for (int i = 0; i < par.size(); i++) {
             participantsID.add(par.get(i));
         }
