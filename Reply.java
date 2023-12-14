@@ -6,6 +6,11 @@ public class Reply extends Action {
         super(id2, msg, userId);
         id2++;
     }
+
+    Reply(String msg, int userId, int replyId) {
+        super(replyId, msg, userId);
+        id2++;
+    }
      @Override
     public String toString() {
         return Integer.toString(id);
@@ -16,9 +21,14 @@ public class Reply extends Action {
            writer.write(linesCount+  SEPERATOR);
            writer.write(ReactorsID.size() + "\n");
            writer.write(content + "\n");
+
+           int ctr = 0;
            for(Integer reactorId: ReactorsID)
             {
-                writer.write(reactorId + SEPERATOR);
+                writer.write(reactorId.toString());
+                if(ctr != ReactorsID.size())
+                    writer.write(SEPERATOR);
+                ctr++;
             }
            writer.write("\n");
            writer.close();

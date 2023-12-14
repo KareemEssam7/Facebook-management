@@ -27,6 +27,16 @@ public class user {
         this.Birthdate = Birthdate;
         FBsystem.users.put(this.id, this);
     }
+    user(String email, String name, String password, char gender, String Birthdate, int userId) {
+        userCount++;
+        this.id = userId;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.gender = gender;
+        this.Birthdate = Birthdate;
+        FBsystem.users.put(this.id, this);
+    }
 
     public void addFriend(user friend, Boolean check) {
         this.friends.add(friend.id);
@@ -88,6 +98,7 @@ public class user {
     }
 
     void MakeConversation(Vector<Integer> usersID) {
+        usersID.add(this.id);
         Conversation newconv = new Conversation(usersID);
         for (int i = 0; i < usersID.size(); i++) {
             FBsystem.users.get(usersID.get(i)).userConvs.add(newconv.uniqueID);

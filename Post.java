@@ -21,21 +21,31 @@ public class Post extends Action {
      public void saveData(FileWriter writer, String SEPERATOR) throws IOException {
             writer.write(userId+SEPERATOR);
             writer.write(id + SEPERATOR);
-            writer.write(privacy + SEPERATOR + "\n");
+            writer.write(privacy + SEPERATOR);
             writer.write(linesCount+  SEPERATOR);
             writer.write(TaggedId.size() + SEPERATOR);
             writer.write(Comments.getSize() + SEPERATOR);
             writer.write(ReactorsID.size() + "\n");
             writer.write(content + "\n");
+
+            int ctr = 0;
             for(Integer taggedId: TaggedId)
             {
-                writer.write(taggedId + SEPERATOR);
+                writer.write(taggedId.toString());
+                if(ctr != TaggedId.size())
+                    writer.write(SEPERATOR);
+                ctr++;
             }
             writer.write("\n");
             Comments.saveData(writer,SEPERATOR);
+
+            ctr = 0;
             for(Integer reactorId: ReactorsID)
             {
-                writer.write(reactorId + SEPERATOR);
+                writer.write(reactorId.toString());
+                if(ctr != ReactorsID.size())
+                    writer.write(SEPERATOR);
+                ctr++;
             }
             writer.write("\n");
 
