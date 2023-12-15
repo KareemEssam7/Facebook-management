@@ -2,15 +2,12 @@ package GUI;
 
 import java.io.IOException;
 
-import javafx.beans.binding.DoubleBinding;
-import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 
 public class MessagesController {
@@ -23,13 +20,13 @@ public class MessagesController {
     @FXML
     Label username;
     @FXML
-    ScrollPane messagScrollPane;
+    ScrollPane messageScrollPane;
     @FXML
-    VBox messagVBox;
+    VBox messageVBox;
     @FXML
     HBox bottomBar;
     @FXML
-    TextField inputField;
+    TextArea inputField;
     @FXML
     Button sendButton;
 
@@ -38,10 +35,8 @@ public class MessagesController {
     public void init(GUI.FeedController container) throws IOException{
         this.container = container;
         panel.prefHeightProperty().bind(container.searchScrollPane.heightProperty().divide(1.002));
-        messagScrollPane.prefHeightProperty().bind(container.searchScrollPane.heightProperty().subtract(topBar.heightProperty()).subtract(bottomBar.heightProperty()));
-        messagVBox.prefWidthProperty().bind(panel.widthProperty());
-        topBar.prefWidthProperty().bind(panel.widthProperty());
-        bottomBar.prefWidthProperty().bind(panel.widthProperty());
+        messageScrollPane.prefHeightProperty().bind(container.searchScrollPane.heightProperty().subtract(topBar.heightProperty()).subtract(bottomBar.heightProperty()));
+        messageVBox.prefWidthProperty().bind(panel.widthProperty());
     }
 
     public void setUsername(String username){
