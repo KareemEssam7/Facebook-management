@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.text.Font?>
+
+<Hyperlink fx:id="chat" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" onAction="#chatPressed" onMouseEntered="#usernameHover" onMouseExited="#usernameDefault" style="-fx-background-color: TRANSPARENT; -fx-underline: false; -fx-text-fill: #0d1b2a;" text="~USERNAME~" textFill="#0d1b2a" visited="true" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ChatController">
+   <font>
+      <Font name="Century Gothic Bold" size="18.0" />
+   </font>
+</Hyperlink>
