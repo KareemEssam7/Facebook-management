@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -30,8 +31,26 @@
       </Text>
       <HBox alignment="CENTER" prefHeight="19.0" prefWidth="400.0" style="-fx-spacing: 30;">
          <children>
-            <Button fx:id="likeButton" alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#likePressed" text="Like" />
-            <Button fx:id="CommentButton" alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#commentPressed" text="Comment" />
+            <VBox alignment="CENTER" spacing="5.0">
+               <children>
+                  <Label fx:id="LikesLabel" text="X Likes">
+                     <font>
+                        <Font name="Century Gothic" size="12.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="likeButton" alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#likePressed" text="Like" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" spacing="5.0">
+               <children>
+                  <Label fx:id="commentsLabel" text="X Comments">
+                     <font>
+                        <Font name="Century Gothic" size="12.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="CommentButton" alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#commentPressed" text="Comment" />
+               </children>
+            </VBox>
          </children>
          <VBox.margin>
             <Insets bottom="10.0" />
