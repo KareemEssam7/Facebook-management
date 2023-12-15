@@ -1,3 +1,5 @@
+package System;
+
 import java.io.*;
 import java.util.*;
 import CustomStructures.*;
@@ -27,6 +29,7 @@ public class user {
         this.Birthdate = Birthdate;
         FBsystem.users.put(this.id, this);
     }
+
     user(String email, String name, String password, char gender, String Birthdate, int userId) {
         userCount++;
         this.id = userId;
@@ -74,12 +77,12 @@ public class user {
     }
 
     void addComment(Post post, String com) {
-        comment newComment = new comment(com,id);
-       post.Comments.pushBack(newComment);
+        comment newComment = new comment(com, id);
+        post.Comments.pushBack(newComment);
     }
 
     void CreatePost(String content, char privacy, Vector<Integer> TaggedId) {
-        Post newPost = new Post(content, privacy, id,TaggedId);
+        Post newPost = new Post(content, privacy, id, TaggedId);
         FBsystem.posts.put(newPost.id, newPost);
         posts.pushBack(newPost.id);
         for (Integer Cur : friends) {
@@ -92,9 +95,10 @@ public class user {
             FBsystem.users.get(tagged).feed.pushBack(newPost.id);
         }
     }
+
     void deletePost(Node<Integer> post) {
-          FBsystem.posts.remove(post.value());
-          posts.deleteNode(post);
+        FBsystem.posts.remove(post.value());
+        posts.deleteNode(post);
     }
 
     void MakeConversation(Vector<Integer> usersID) {
@@ -118,18 +122,19 @@ public class user {
             FBsystem.conversations.remove(convID);
         }
     }
+
     // hidden easteregg
     void restrictUser(int userID) {
         restrictedUsers.set(userID);
         JoinedList<Integer> userPostList = FBsystem.users.get(userID).feed;
         Node<Integer> p = userPostList.iteratorToStart();
         while (p != null) {
-            Post cur=FBsystem.posts.get(p.value());
-            if( cur==null || (cur.privacy=='-' && cur.userId == this.id) )
+            Post cur = FBsystem.posts.get(p.value());
+            if (cur == null || (cur.privacy == '-' && cur.userId == this.id))
                 p = userPostList.deleteNode(p);
             else
                 p = userPostList.nextValue();
-            
+
         }
     }
 
@@ -141,15 +146,15 @@ public class user {
         if (FBsystem.users.get(this.id).friends.contains(userID)) {
             removeFriend(userID);
         }
-          JoinedList<Integer> userPostList = FBsystem.users.get(userID).feed;
+        JoinedList<Integer> userPostList = FBsystem.users.get(userID).feed;
         Node<Integer> p = userPostList.iteratorToStart();
         while (p != null) {
-            Post cur=FBsystem.posts.get(p.value());
-            if( cur==null || cur.userId == this.id )
+            Post cur = FBsystem.posts.get(p.value());
+            if (cur == null || cur.userId == this.id)
                 p = userPostList.deleteNode(p);
             else
                 p = userPostList.nextValue();
-            
+
         }
         blockedUsers.set(userID, true);
     }
@@ -163,12 +168,16 @@ public class user {
         return id;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     // compares a given password with the user's password
     boolean comparePassword(String toCompare) {
         return toCompare.equals(password);
     }
-    
-    //saves password to file
+
+    // saves password to file
     public void savePassword(FileWriter writer) throws IOException {
         writer.write(password);
     }

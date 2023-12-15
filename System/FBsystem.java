@@ -1,3 +1,4 @@
+package System;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -16,7 +17,7 @@ public class FBsystem {
     private final static String emailConstraints = "^(?=.{1,64}@)[A-Za-z\\d_-]+(\\.[A-Za-z\\d_-]+)*@[A-Za-z\\d][A-Za-z\\d-]+(\\.[A-Za-z\\d-]+)*(\\.[A-Za-z]{2,})$";
     private final static String passwordConstraints = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*\\p{Punct})[A-Za-z\\d\\p{Punct}]{8,32}$";
     private final static String nameConstraints = "^[A-Za-z]{3,10}(\\s [A-Za-z]{3,10})?$";
-    
+    public static user CurUser = null;
     // function to hash strings using sha3-256 and returns it as a base-64 string.
     public static String hashString(String stringToHash) {
         try {

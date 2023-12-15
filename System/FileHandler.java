@@ -1,6 +1,8 @@
+package System;
 import java.io.*;
 import java.util.*;
 
+import CustomStructures.*;
 
 public class FileHandler {
     public final static String FILES_PATH = new String(".\\Facebook-management\\Database\\");
