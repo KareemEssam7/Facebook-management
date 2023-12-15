@@ -6,10 +6,17 @@
     "configurations": [
         {
             "type": "java",
+            "name": "main",
+            "request": "launch",
+            "mainClass": "System.main",
+            "projectName": "Facebook-management_d273385c"
+        },
+        {
+            "type": "java",
             "name": "Launch App",
             "request": "launch",
             "mainClass": "GUI.Main",
-            "vmArgs": "--module-path \"C:\\Program Files\\Java\\javafx-sdk-21.0.1\\lib\" --add-modules javafx.controls,javafx.fxml",
+            "vmArgs": "--module-path \"C:\\Program Files\\Java\\javafx-sdk-21.0.1\\lib\" --add-modules javafx.controls,javafx.fxml"
         }
     ]
 }

@@ -1,3 +1,8 @@
+package System;
+import java.io.*;
+import java.util.*;
+
+import CustomStructures.*;
 public class message {
     final int senderID;
     final long messageID;
