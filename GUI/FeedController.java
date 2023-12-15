@@ -27,6 +27,8 @@ public class FeedController {
     @FXML
     Button searchButton;
     @FXML
+    Button createConversationButton;
+    @FXML
     Button logoutButton;
     @FXML
     Pane whiteSpacePane;

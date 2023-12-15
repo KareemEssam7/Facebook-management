@@ -3,6 +3,7 @@ package GUI;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -10,15 +11,17 @@ import javafx.scene.text.Text;
 public class PostController {
 
     @FXML
-    VBox panel;
+    private VBox panel;
     @FXML
-    Hyperlink username;
+    private Hyperlink username;
     @FXML
-    Text body;
+    private Text body;
     @FXML
-    Button likeButton;
+    private Button likeButton;
     @FXML
-    Button commentButton;
+    private Button commentButton;
+    @FXML
+    private ToggleGroup privacySettings;
 
     public void setContent(String usernameString, String bodyString){
         username.setText(usernameString);
