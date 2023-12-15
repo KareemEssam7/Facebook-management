@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.PasswordField?>
@@ -7,91 +8,106 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<?import GUI.ImageViewPane?>
 
-<StackPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: INDIGO;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.RegisterController">
+<StackPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #778da9;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.RegisterController">
    <children>
-        <ImageViewPane fx:id="imageViewPane">
-            <imageView>
-                <ImageView fx:id="imageView" pickOnBounds="true" preserveRatio="false" StackPane.alignment="CENTER">
-                    <image>
-                        <Image url="@bg.png" />
-                    </image>
-                </ImageView>
-            </imageView>
-        </ImageViewPane>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="560.0" prefWidth="500.0" style="-fx-background-radius: 15; -fx-background-color: WHITE;" StackPane.alignment="CENTER">
-         <children>
-            <TextField fx:id="emailField"  focusTraversable="false" layoutX="107.0" layoutY="86.0" prefHeight="40.0" prefWidth="280.0" promptText="Email">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </TextField>
-            <PasswordField fx:id="passwordField" focusTraversable="false" layoutX="106.0" layoutY="189.0" prefHeight="40.0" prefWidth="280.0" promptText="Password">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </PasswordField>
-            <Button focusTraversable="false" layoutX="266.0" layoutY="477.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="120.0" style="-fx-background-radius: 5;" text="Register" onAction="#registerButtonAction">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Button>
-            <Text layoutX="190.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Register">
-               <font>
-                  <Font name="Google Sans Medium" size="31.0" />
-               </font>
-            </Text>
-            <TextField fx:id="usernameField" focusTraversable="false" layoutX="107.0" layoutY="136.0" prefHeight="40.0" prefWidth="280.0" promptText="Username">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </TextField>
-            <RadioButton focusTraversable="false" layoutX="107.0" layoutY="400.0" mnemonicParsing="false" text="Male">
-               <font>
-                  <Font name="Open Sans Medium" size="12.0" />
-               </font>
-               <toggleGroup>
-                  <ToggleGroup fx:id="gender" />
-               </toggleGroup>
-            </RadioButton>
-            <RadioButton focusTraversable="false" layoutX="187.0" layoutY="400.0" mnemonicParsing="false" text="Female" toggleGroup="$gender" />
-            <DatePicker fx:id="Birthdate" focusTraversable="false" layoutX="107.0" layoutY="335.0" />
-            <Button focusTraversable="false" layoutX="107.0" layoutY="477.0" mnemonicParsing="false" onAction="#GoToLogin" prefHeight="45.0" prefWidth="120.0" style="-fx-background-radius: 5;" text="Back">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Button>
-            <PasswordField fx:id="ConfirmPasswordField"  focusTraversable="false" layoutX="106.0" layoutY="240.0" prefHeight="40.0" prefWidth="280.0" promptText="Confirm Password">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </PasswordField>
-            <Text layoutX="107.0" layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gender" wrappingWidth="119.99999999999989">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Text>
-            <Text layoutX="107.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of Birth" wrappingWidth="119.99999999999989">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Text>
-         </children>
+
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="440.0" style="-fx-background-radius: 15; -fx-background-color: WHITE;" StackPane.alignment="CENTER">
          <effect>
             <DropShadow blurType="GAUSSIAN" height="100.0" radius="49.5" width="100.0">
                <color>
-                  <Color opacity="0.7664974331855774" />
+                  <Color opacity="0.4" />
                </color>
             </DropShadow>
          </effect>
+         <children>
+            <VBox alignment="CENTER" prefHeight="600.0" prefWidth="440.0" spacing="20.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Register" textAlignment="CENTER">
+                     <font>
+                        <Font name="Century Gothic Bold" size="31.0" />
+                     </font>
+                  </Text>
+                  <VBox alignment="CENTER" spacing="15.0">
+                     <children>
+                        <Text fx:id="errorsText" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="318.66668701171875">
+                           <font>
+                              <Font name="Century Gothic" size="14.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="emailField" focusTraversable="false" prefHeight="40.0" prefWidth="280.0" promptText="Email">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="usernameField" focusTraversable="false" prefHeight="40.0" prefWidth="280.0" promptText="Username">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </TextField>
+                        <PasswordField fx:id="passwordField" focusTraversable="false" prefHeight="40.0" prefWidth="280.0" promptText="Password">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </PasswordField>
+                        <PasswordField fx:id="ConfirmPasswordField" focusTraversable="false" prefHeight="40.0" prefWidth="280.0" promptText="Confirm Password">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </PasswordField>
+                     </children>
+                  </VBox>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date of Birth" textAlignment="CENTER">
+                     <font>
+                        <Font name="Century Gothic Bold" size="20.0" />
+                     </font>
+                  </Text>
+                  <DatePicker fx:id="Birthdate" focusTraversable="false" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gender" textAlignment="CENTER">
+                     <font>
+                        <Font name="Century Gothic Bold" size="20.0" />
+                     </font>
+                  </Text>
+                  <HBox alignment="CENTER" spacing="25.0">
+                     <children>
+                        <RadioButton focusTraversable="false" mnemonicParsing="false" text="Male">
+                           <font>
+                              <Font name="Open Sans Medium" size="12.0" />
+                           </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="gender" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton focusTraversable="false" mnemonicParsing="false" text="Female" toggleGroup="$gender" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" spacing="20.0">
+                     <children>
+                        <Button focusTraversable="false" mnemonicParsing="false" onAction="#GoToLogin" prefHeight="45.0" prefWidth="120.0" style="-fx-background-radius: 5;" text="Back">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Button>
+                        <Button focusTraversable="false" mnemonicParsing="false" onAction="#registerButtonAction" prefHeight="45.0" prefWidth="120.0" style="-fx-background-radius: 5;" text="Register">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="25.0" left="60.0" right="60.0" top="25.0" />
+               </padding>
+            </VBox>
+         </children>
       </Pane>
    </children>
 </StackPane>
