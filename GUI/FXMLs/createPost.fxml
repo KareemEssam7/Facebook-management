@@ -3,7 +3,9 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -14,12 +16,33 @@
    <children>
       <Label fx:id="title" style="-fx-text-fill: #0d1b2a;" text="Create post">
          <VBox.margin>
-            <Insets left="25.0" right="25.0" top="25.0" />
+            <Insets left="25.0" right="25.0" top="10.0" />
          </VBox.margin>
          <font>
             <Font name="Century Gothic Bold" size="24.0" />
          </font>
       </Label>
+      <HBox alignment="CENTER_LEFT" spacing="25.0">
+         <children>
+            <Label text="Privacy:">
+               <font>
+                  <Font name="Century Gothic" size="18.0" />
+               </font>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Label>
+            <RadioButton focusTraversable="false" mnemonicParsing="false" text="Public">
+               <toggleGroup>
+                  <ToggleGroup fx:id="privacySettings" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton focusTraversable="false" mnemonicParsing="false" text="Friends Only" toggleGroup="$privacySettings" />
+         </children>
+         <VBox.margin>
+            <Insets bottom="10.0" left="25.0" right="25.0" top="25.0" />
+         </VBox.margin>
+      </HBox>
       <TextArea fx:id="inputField" focusTraversable="false" prefHeight="150.0" prefWidth="349.0" promptText="Enter post content" wrapText="true" VBox.vgrow="ALWAYS">
          <font>
             <Font size="18.0" />
@@ -44,4 +67,7 @@
          </color>
       </DropShadow>
    </effect>
+   <padding>
+      <Insets top="25.0" />
+   </padding>
 </VBox>

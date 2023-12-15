@@ -46,16 +46,6 @@
    </center>
    <right>
       <BorderPane fx:id="conversationsPane" prefHeight="200.0" prefWidth="280.0" style="-fx-background-color: #778da9;" BorderPane.alignment="CENTER">
-         <top>
-            <Label text="Conversations" BorderPane.alignment="CENTER">
-               <font>
-                  <Font name="Century Gothic" size="22.0" />
-               </font>
-               <BorderPane.margin>
-                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-               </BorderPane.margin>
-            </Label>
-         </top>
          <center>
             <ScrollPane fx:id="messagesScrollPane" focusTraversable="false" hbarPolicy="NEVER" prefHeight="601.0" prefWidth="280.0" style="-fx-background-color: TRANSPARENT; -fx-background: #778da9;" BorderPane.alignment="CENTER">
                <content>
@@ -67,6 +57,21 @@
                </content>
             </ScrollPane>
          </center>
+         <top>
+            <VBox alignment="CENTER" spacing="5.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Conversations">
+                     <font>
+                        <Font name="Century Gothic" size="22.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="createConversationButton" focusTraversable="false" mnemonicParsing="false" text="Create Conversation" />
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </BorderPane.margin>
+            </VBox>
+         </top>
       </BorderPane>
    </right>
 </BorderPane>
