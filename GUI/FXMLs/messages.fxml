@@ -4,7 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -27,14 +27,21 @@
             <Insets left="15.0" right="15.0" />
          </padding>
       </HBox>
-      <ScrollPane fx:id="messagScrollPane" focusTraversable="false" hbarPolicy="NEVER" prefHeight="473.0" style="-fx-background-color: TRANSPARENT;">
+      <ScrollPane fx:id="messageScrollPane" focusTraversable="false" hbarPolicy="NEVER" prefHeight="473.0" style="-fx-background-color: TRANSPARENT;">
          <content>
-            <VBox fx:id="messagVBox" />
+            <VBox fx:id="messageVBox" />
          </content>
       </ScrollPane>
-      <HBox fx:id="bottomBar" alignment="CENTER" prefHeight="60.0" style="-fx-spacing: 10; -fx-background-color: #778da9;">
+      <HBox fx:id="bottomBar" alignment="CENTER" prefHeight="70.0" prefWidth="320.0" style="-fx-spacing: 10; -fx-background-color: #778da9;">
          <children>
-            <TextField fx:id="inputField" focusTraversable="false" prefWidth="200.0" promptText="Enter Message" />
+            <TextArea fx:id="inputField" focusTraversable="false" prefHeight="50.0" prefWidth="230.0" promptText="Enter Message" wrapText="true">
+               <HBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextArea>
             <Button fx:id="sendButton" focusTraversable="false" mnemonicParsing="false" text="Send" />
          </children>
       </HBox>
