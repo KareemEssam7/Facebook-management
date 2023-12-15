@@ -116,15 +116,24 @@ class main {
         jiangly.block(ayman.getId());
         jiangly.CreatePost("Cats are really good", '+', new Vector<Integer>());
         jiangly.CreatePost("cats are bad", '-',new Vector<Integer>());
-        amany.addComment(FBsystem.posts.get(amany.feed.getStartNode().value()), "i hate kareem essam");
+        amany.addComment(FBsystem.posts.get(amany.feed.getStartNode().value()), "i hate clean code");
         khater.addReply(FBsystem.posts.get(amany.feed.getStartNode().value()).Comments.getStartNode().value(),"i love segment tree");
+        
+        Vector<Integer> convo = new Vector<Integer>();
+        convo.add(jiangly.getId());
+        convo.add(mahrous.getId());
+
+        jiangly.MakeConversation(convo);
+        jiangly.SendMessage("I hate Mahrous", jiangly.userConvs.iterator().next());
         try {
+            FileHandler.load();
+            FileHandler.clearDB();
             FileHandler.save();
             System.out.println("meow");
         }
         catch (IOException e) {
             System.out.println("FAIL");
         }
-    
+        
     }
 }

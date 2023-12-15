@@ -90,6 +90,7 @@ public class FBsystem {
             return -1;
     }
 
+    //counts how much the character 'c' have occured
     public static int charCount(char c, String s) {
         int ctr = 0;
         for(int i = 0; i < s.length(); i++) {
@@ -97,5 +98,12 @@ public class FBsystem {
                 ctr++;
         }
         return ctr;
+    }
+
+    public static void clearData() {
+        accounts.clear();
+        conversations.clear();
+        posts.clear();
+        users.clear();
     }
 }

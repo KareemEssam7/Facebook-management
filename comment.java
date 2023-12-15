@@ -10,6 +10,10 @@ public class comment extends Action {
         super(id2, msg, userId);
         id2++;
     }
+    comment(String msg,int userId, int commentId) {
+        super(commentId, msg, userId);
+        id2++;
+    }
 
     @Override
     public String toString() {
@@ -24,9 +28,14 @@ public class comment extends Action {
             writer.write(ReactorsID.size() + "\n");
             writer.write(content + "\n");
             Replies.saveData(writer,SEPERATOR);
+
+            int ctr = 0;
             for(Integer reactorId: ReactorsID)
             {
-                writer.write(reactorId + SEPERATOR);
+                writer.write(reactorId.toString());
+                if(ctr != ReactorsID.size())
+                    writer.write(SEPERATOR);
+                ctr++;
             }
             writer.write("\n");
             writer.close();

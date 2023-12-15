@@ -92,7 +92,9 @@ public class JoinedList<T> {
 
     public void saveData(FileWriter writer, String SEPERATOR) throws IOException {
         for(Node<T> it = iteratorToStart(); it != null; it = nextValue()) {
-            writer.write(it.value().toString() + SEPERATOR);
+            writer.write(it.value().toString());
+            if(it != endNode)
+                writer.write(SEPERATOR);
         }
         writer.write("\n");
     }
