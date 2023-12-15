@@ -4,6 +4,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -14,16 +16,15 @@ public class Main extends Application {
         Parent root = loader.load();
         GUI.FeedController feed = loader.getController();
 
-        feed.initFeed();
+        feed.init();
 
         feed.addPost("KareemEssam", "Meow.");
         feed.addPost("Tuber", "Mew.");
         feed.addPost("KareemEssam", "Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2.");
         feed.addPost("KareemEssam", "Meow3.");
         feed.addPost("KareemEssam", "Meow4.");
-        
 
-        for(int i = 0 ; i < 4; i++)
+        for(int i = 0 ; i < 100; i++)
             feed.addChat("KAREEMESSAM" + (i+1));
         
         

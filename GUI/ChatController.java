@@ -1,5 +1,7 @@
 package GUI;
 
+import java.io.IOException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Hyperlink;
 
@@ -8,9 +10,15 @@ public class ChatController {
     @FXML
     Hyperlink chat;
 
-    @FXML
-    public void chatPressed(){
+    GUI.FeedController container;
 
+    @FXML
+    public void chatPressed() throws IOException{
+        container.openChat(chat.getText());
+    }
+
+    public void setContainer(GUI.FeedController container){
+        this.container = container;
     }
 
     public void setUsername(String username){
