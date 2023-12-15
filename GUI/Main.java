@@ -22,8 +22,8 @@ public class Main extends Application {
         feed.addPost("KareemEssam", "Meow3.");
         feed.addPost("KareemEssam", "Meow4.");
 
-        for(int i = 0 ; i < 100; i++)
-            feed.addChat("KAREEMESSAM" + (i+1));
+        for(int i = 1 ; i <= 100; i++)
+            feed.addChat("KAREEMESSAM" + i);
         
         
         primaryStage.setTitle("Hello World");

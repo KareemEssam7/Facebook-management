@@ -3,16 +3,18 @@ package GUI;
 import java.io.IOException;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
 public class MessagesController {
     @FXML
-    VBox panel;
+    BorderPane panel;
     @FXML
     HBox topBar;
     @FXML
@@ -46,6 +48,21 @@ public class MessagesController {
     @FXML
     public void close() throws IOException{
         container.closeChat();
+    }
+
+    public void addMessage(String username, String body) throws IOException{
+        FXMLLoader loader;
+        if(username != null){
+            loader = new FXMLLoader(getClass().getResource("FXMLs/recievedMessage.fxml"));
+        }
+        else
+            loader = new FXMLLoader(getClass().getResource("FXMLs/sentMessage.fxml")); // not made yet
+        HBox createMessage = loader.load();
+        MessageController controller = loader.getController();
+        controller.setContent(username, body);
+
+        messageVBox.getChildren().add(createMessage);
+        
     }
 
 }
