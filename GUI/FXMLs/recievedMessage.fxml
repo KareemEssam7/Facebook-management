@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: TRANSPARENT;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.MessageController">
+   <children>
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="240.0" style="-fx-background-radius: 30; -fx-background-color: WHITE;">
+         <children>
+            <Label fx:id="username" text="~USERNAME~">
+               <font>
+                  <Font name="Century Gothic Bold" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
+            </Label>
+            <Text fx:id="body" strokeType="OUTSIDE" strokeWidth="0.0" text="~BODY~" wrappingWidth="197.4700222015381" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+         </children>
+         <effect>
+            <DropShadow spread="0.05">
+               <color>
+                  <Color opacity="0.20000000298023224" />
+               </color>
+            </DropShadow>
+         </effect>
+      </VBox>
+      <Pane prefWidth="40.0" style="-fx-background-color: TRANSPARENT;" HBox.hgrow="NEVER" />
+   </children>
+</HBox>

@@ -42,7 +42,8 @@ public class FeedController {
     @FXML
     public VBox postsVBox;
 
-    private VBox messages = null;
+    BorderPane messages = null;
+    MessagesController messagesController = null;
 
     public void init() throws IOException{
         DoubleBinding itemsLength = searchBar.widthProperty().add(searchButton.widthProperty()).add(logoutButton.widthProperty());
@@ -85,16 +86,27 @@ public class FeedController {
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLs/messages.fxml"));
         messages = loader.load();
-        MessagesController controller = loader.getController();
+        messagesController = loader.getController();
 
-        controller.init(this);
-        controller.setUsername(username);
+        messagesController.init(this);
+        messagesController.setUsername(username);
 
         windowPane.setRight(messages);
+
+        addMessageToChat("Person #1", "test123");
+        addMessageToChat(null, "123test");
+        addMessageToChat(null, "test321\ntest123");
+        addMessageToChat("Person #2", "321tset");
+    }
+
+    public void addMessageToChat(String username, String body) throws IOException{
+        messagesController.addMessage(username, body);
+        messagesController.messageScrollPane.setVvalue(messagesController.messageScrollPane.getVmax());
     }
 
     public void closeChat() throws IOException{
         messages = null;
+        messagesController = null;
         windowPane.setRight(messagesScrollPane);
     }
 }
