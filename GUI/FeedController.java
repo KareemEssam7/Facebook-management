@@ -32,15 +32,17 @@ public class FeedController {
     @FXML
     ScrollPane messagesScrollPane;
     @FXML
-    public VBox messagesVBox;
+    VBox messagesVBox;
     @FXML
     ScrollPane searchScrollPane;
     @FXML
-    public VBox searchVBox;
+    VBox searchVBox;
+    @FXML
+    BorderPane conversationsPane;
     @FXML
     ScrollPane postsScrollpane;
     @FXML
-    public VBox postsVBox;
+    VBox postsVBox;
 
     BorderPane messages = null;
     MessagesController messagesController = null;
@@ -107,6 +109,6 @@ public class FeedController {
     public void closeChat() throws IOException{
         messages = null;
         messagesController = null;
-        windowPane.setRight(messagesScrollPane);
+        windowPane.setRight(conversationsPane);
     }
 }
