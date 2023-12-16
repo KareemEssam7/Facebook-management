@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="profileVBox" alignment="TOP_CENTER" spacing="20.0" style="-fx-background-color: TRANSPARENT;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ProfileController">
+   <children>
+      <HBox spacing="35.0" style="-fx-background-color: TRANSPARENT;">
+         <children>
+            <Label fx:id="username" focusTraversable="false" text="~USERNAME~">
+               <font>
+                  <Font name="Century Gothic Bold" size="27.0" />
+               </font>
+               <HBox.margin>
+                  <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+               </HBox.margin>
+            </Label>
+            <HBox alignment="CENTER" spacing="15.0" style="-fx-background-color: TRANSPARENT;">
+               <children>
+                  <Button fx:id="friendButton" focusTraversable="false" mnemonicParsing="false" onAction="#friendButtonPressed" text="Add Friend" />
+                  <Button fx:id="restrictButton" focusTraversable="false" mnemonicParsing="false" onAction="#restrictButtonPressed" text="Restrict" />
+                  <Button fx:id="blockButton" focusTraversable="false" mnemonicParsing="false" onAction="#blockButtonPressed" text="Block" />
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+      <VBox fx:id="profileFeed" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="20.0" VBox.vgrow="ALWAYS">
+         <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+         </padding>
+      </VBox>
+   </children>
+</VBox>
