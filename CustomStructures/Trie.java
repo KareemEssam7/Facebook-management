@@ -25,7 +25,7 @@ public class Trie {
 
     for (level = 0; level < length; level++) {
 
-      if (pCrawl.children.containsKey(key.charAt(level)))
+      if (!pCrawl.children.containsKey(key.charAt(level)))
         pCrawl.children.put(key.charAt(level) ,new TrieNode());
 
         pCrawl = pCrawl.children.get(key.charAt(level));

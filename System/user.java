@@ -27,7 +27,9 @@ public class user {
         this.password = password;
         this.gender = gender;
         this.Birthdate = Birthdate;
+        Trie.insert(name, this.id);
         FBsystem.users.put(this.id, this);
+        FBsystem.accounts.put(email, this.id);
     }
 
     user(String email, String name, String password, char gender, String Birthdate, int userId) {
@@ -38,7 +40,9 @@ public class user {
         this.password = password;
         this.gender = gender;
         this.Birthdate = Birthdate;
+        Trie.insert(name, this.id);
         FBsystem.users.put(this.id, this);
+        FBsystem.accounts.put(email, this.id);
     }
 
     public void addFriend(user friend, Boolean check) {
@@ -86,7 +90,6 @@ public class user {
         Post newPost = new Post(content, privacy, id, TaggedId);
         FBsystem.posts.put(newPost.id, newPost);
         posts.pushBack(newPost.id);
-        
         //FeedController.addPost();
         //get gud bro
         for(Integer Tagged:TaggedId)
@@ -124,9 +127,9 @@ public class user {
         posts.deleteNode(post);
     }
 
-    public void MakeConversation(Vector<Integer> usersID) {
+    public void MakeConversation(Vector<Integer> usersID,String Name) {
         usersID.add(this.id);
-        Conversation newconv = new Conversation(usersID);
+        Conversation newconv = new Conversation(usersID,Name);
         for (int i = 0; i < usersID.size(); i++) {
             FBsystem.users.get(usersID.get(i)).userConvs.add(newconv.getUniqueID());
         }
@@ -205,19 +208,7 @@ public class user {
         writer.write(password);
     }
 
-    public Vector<Post> common_Posts(int ID){
-
-        Vector<Post> post=new Vector<Post>();
-
-        for( Node<Integer> it = posts.iteratorToStart(); it != null; it = posts.nextValue()) {
-          Post cur=FBsystem.posts.get(it.value());
-          if(cur.TaggedId.contains(ID) || cur.userId == ID){
-            post.add(cur);
-          }
-        }
-
-        return post;
-    }
+    
 
     public Vector<Integer> common_Friends(int ID){
 

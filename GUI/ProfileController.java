@@ -8,6 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
+import System.*;
+import CustomStructures.*;
 
 public class ProfileController {
     @FXML
@@ -35,23 +37,31 @@ public class ProfileController {
 
         //add profile posts here
         
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLs/post.fxml"));
-        VBox post = loader.load();
-        PostController controller = loader.getController();
-        controller.init(username, "Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2.", feedController);
-        profileFeed.getChildren().add(post);
+        for( Node<Integer> it = FBsystem.CurUser.feed.iteratorToStart(); it != null; it = FBsystem.CurUser.feed.nextValue()) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLs/post.fxml"));
+            VBox post = loader.load();
+            PostController controller = loader.getController();
+            controller.init(FBsystem.posts.get(it.value()),feedController);
+            profileFeed.getChildren().add(post); 
+        }
 
-        FXMLLoader load = new FXMLLoader(getClass().getResource("FXMLs/post.fxml"));
-        VBox post2 = load.load();
-        PostController controller2 = load.getController();
-        controller2.init(username, "Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2.", feedController);
-        profileFeed.getChildren().add(post2);
+        // FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLs/post.fxml"));
+        // VBox post = loader.load();
+        // PostController controller = loader.getController();
+        // controller.init(username, "Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2.", feedController);
+        // profileFeed.getChildren().add(post);
 
-        FXMLLoader load3 = new FXMLLoader(getClass().getResource("FXMLs/post.fxml"));
-        VBox post23 = load3.load();
-        PostController controller23 = load3.getController();
-        controller23.init(username, "Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2.", feedController);
-        profileFeed.getChildren().add(post23);
+        // FXMLLoader load = new FXMLLoader(getClass().getResource("FXMLs/post.fxml"));
+        // VBox post2 = load.load();
+        // PostController controller2 = load.getController();
+        // controller2.init(username, "Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2.", feedController);
+        // profileFeed.getChildren().add(post2);
+
+        // FXMLLoader load3 = new FXMLLoader(getClass().getResource("FXMLs/post.fxml"));
+        // VBox post23 = load3.load();
+        // PostController controller23 = load3.getController();
+        // controller23.init(username, "Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2.", feedController);
+        // profileFeed.getChildren().add(post23);
 
     }
     @FXML

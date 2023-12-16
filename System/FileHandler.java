@@ -1,6 +1,7 @@
 package System;
 import java.io.*;
 import java.util.*;
+import CustomStructures.Trie;
 
 public abstract class FileHandler {
     public final static String FILES_PATH = new String(".\\Facebook-management\\Database\\");
@@ -88,7 +89,6 @@ public abstract class FileHandler {
                 ctr++;
             }
             writer.write("\n");
-
             currUser.posts.saveData(writer, SEPERATOR);
             
             ctr = 0;
@@ -128,6 +128,7 @@ public abstract class FileHandler {
             writer.write(currConversation.getUniqueID() + SEPERATOR);
             writer.write(currConversation.participantsID.size() + SEPERATOR);
             writer.write(currConversation.messagesCnt + "\n");
+            writer.write(currConversation.convName + "\n");
 
             int ctr = 0;
             for(Integer participantID : currConversation.participantsID) {
@@ -156,11 +157,12 @@ public abstract class FileHandler {
     public static void load() throws IOException {
         FileIntializer();
         FBsystem.clearData();
-
         //replies
         File file = new File(FILES_PATH + REPLIES_FILE);
         Scanner reader = new Scanner(file);
-        int repliesCount = Integer.parseInt(reader.nextLine());
+        int repliesCount = 0;
+        if(reader.hasNext())
+            Integer.parseInt(reader.nextLine());
         HashMap<Integer, Reply> replies = null;
         if(repliesCount != 0) {
             replies = new HashMap<Integer, Reply>();
@@ -174,8 +176,10 @@ public abstract class FileHandler {
 
                 int reactorsCount = Integer.parseInt(mainDetails[3]);
                 if(reactorsCount != 0) {
-                    String[] ReactorIDs = reader.nextLine().split(SEPERATOR_EXPR, reactorsCount);
+                    String[] ReactorIDs = reader.nextLine().split(SEPERATOR_EXPR, reactorsCount+1);
                     for(String reactorID : ReactorIDs) {
+                        if(reactorID.equals(""))
+                            break;
                         replies.get(i).ReactorsID.add(Integer.parseInt(reactorID));
                     }
                 }
@@ -185,11 +189,12 @@ public abstract class FileHandler {
         }
 
         reader.close();
-        
         //comments
         file = new File(FILES_PATH + COMMENTS_FILE);
         reader = new Scanner(file);
-        int commentsCount = Integer.parseInt(reader.nextLine());
+        int commentsCount = 0;
+        if(reader.hasNext())
+            commentsCount = Integer.parseInt(reader.nextLine());
         HashMap<Integer, comment> comments = null;
         if(commentsCount != 0) {
             comments = new HashMap<Integer, comment>();
@@ -206,8 +211,10 @@ public abstract class FileHandler {
                 int currRepliesCount = Integer.parseInt(mainDetails[3]);
 
                 if(currRepliesCount != 0) {
-                    String[] RepliesIDs = reader.nextLine().split(SEPERATOR_EXPR, currRepliesCount);
+                    String[] RepliesIDs = reader.nextLine().split(SEPERATOR_EXPR, currRepliesCount+1);
                     for(String replyID : RepliesIDs) {
+                        if(replyID.equals(""))
+                            break;
                         comments.get(i).Replies.pushBack(replies.get(Integer.parseInt(replyID)));
                     }
                 }
@@ -215,8 +222,10 @@ public abstract class FileHandler {
                     reader.nextLine();
 
                 if(reactorsCount != 0) {
-                    String[] ReactorIDs = reader.nextLine().split(SEPERATOR_EXPR, reactorsCount);
+                    String[] ReactorIDs = reader.nextLine().split(SEPERATOR_EXPR, reactorsCount+1);
                     for(String reactorID : ReactorIDs) {
+                        if(reactorID.equals(""))
+                            break;
                         comments.get(i).ReactorsID.add(Integer.parseInt(reactorID));
                     }
                 }
@@ -224,13 +233,17 @@ public abstract class FileHandler {
                     reader.nextLine();
 
             }
+        }
             reader.close();
-            replies.clear();
+            if(replies!=null)
+                replies.clear();
 
             //posts
             file = new File(FILES_PATH + POSTS_FILE);
             reader = new Scanner(file);
-            int postsCount = Integer.parseInt(reader.nextLine());
+            int postsCount = 0;
+            if(reader.hasNext())
+                postsCount = Integer.parseInt(reader.nextLine());
             for(int i = 0; i < postsCount; i++) {
                 String[] mainDetails = reader.nextLine().split(SEPERATOR_EXPR, 7);
                 int linesCount = Integer.parseInt(mainDetails[3]);
@@ -242,8 +255,10 @@ public abstract class FileHandler {
 
                 Vector<Integer> TaggedIds = new Vector<Integer>(taggedCount+1);
                 if(taggedCount != 0) {
-                    String[] TaggedStrings = reader.nextLine().split(SEPERATOR_EXPR, taggedCount);
+                    String[] TaggedStrings = reader.nextLine().split(SEPERATOR_EXPR, taggedCount+1);
                     for(String taggedID : TaggedStrings) {
+                        if(taggedID.equals(""))
+                            break;
                         TaggedIds.add(Integer.parseInt(taggedID));
                     }
                 }
@@ -256,8 +271,10 @@ public abstract class FileHandler {
                 int currCommentsCount = Integer.parseInt(mainDetails[5]);
 
                 if(currCommentsCount != 0) {
-                    String[] commentStrings = reader.nextLine().split(SEPERATOR_EXPR, currCommentsCount);
+                    String[] commentStrings = reader.nextLine().split(SEPERATOR_EXPR, currCommentsCount+1);
                     for(String commID : commentStrings) {
+                        if(commID.equals(""))
+                            break;
                         FBsystem.posts.get(id).Comments.pushBack(comments.get(Integer.parseInt(commID)));
                     }
                 }
@@ -266,8 +283,10 @@ public abstract class FileHandler {
 
                 int reactorsCount = Integer.parseInt(mainDetails[6]);
                 if(reactorsCount != 0) {
-                    String[] ReactorIDs = reader.nextLine().split(SEPERATOR_EXPR, reactorsCount);
+                    String[] ReactorIDs = reader.nextLine().split(SEPERATOR_EXPR, reactorsCount+1);
                     for(String reactorID : ReactorIDs) {
+                        if(reactorID.equals(""))
+                            break;
                         FBsystem.posts.get(i).ReactorsID.add(Integer.parseInt(reactorID));
                     }
                 }
@@ -276,19 +295,21 @@ public abstract class FileHandler {
 
             }
             reader.close();
-            comments.clear();
+            if(comments!=null)
+                comments.clear();
 
             //user
             file = new File(FILES_PATH + USERS_FILE);
             reader = new Scanner(file);
-            int usersCount = Integer.parseInt(reader.nextLine());
+            int usersCount = 0;
+            if(reader.hasNext())
+                usersCount = Integer.parseInt(reader.nextLine());
             for(int i = 0; i < usersCount; i++) {
                 String[] mainDetails = reader.nextLine().split(SEPERATOR_EXPR, 12);
                 String userMail = mainDetails[2];
+                String userName = mainDetails[1];
                 int id = Integer.parseInt(mainDetails[0]);
-
-                FBsystem.accounts.put(userMail, id);
-                FBsystem.users.put(id, new user(userMail, mainDetails[1], mainDetails[3], mainDetails[5].charAt(0), mainDetails[4], id));
+                FBsystem.users.put(id, new user(userMail, userName, mainDetails[3], mainDetails[5].charAt(0), mainDetails[4], id));
                 int restrictedSize = Integer.parseInt(mainDetails[6]);
                 int blockedSize = Integer.parseInt(mainDetails[7]);
                 int friendsSize = Integer.parseInt(mainDetails[8]);
@@ -297,43 +318,55 @@ public abstract class FileHandler {
                 int feedSize = Integer.parseInt(mainDetails[11]);
 
                 if(restrictedSize != 0)
-                    FBsystem.users.get(id).restrictedUsers = stringToBitSet(reader.nextLine().split(SEPERATOR_EXPR, restrictedSize));
+                    FBsystem.users.get(id).restrictedUsers = stringToBitSet(reader.nextLine().split(SEPERATOR_EXPR, restrictedSize+1));
                 else
                     reader.nextLine();
 
                 if(blockedSize != 0)
-                    FBsystem.users.get(id).blockedUsers = stringToBitSet(reader.nextLine().split(SEPERATOR_EXPR, blockedSize));
+                    FBsystem.users.get(id).blockedUsers = stringToBitSet(reader.nextLine().split(SEPERATOR_EXPR, blockedSize+1));
                 else
                     reader.nextLine();
 
                 if(friendsSize != 0) {
-                    String[] friendStrings = reader.nextLine().split(SEPERATOR_EXPR, friendsSize);
-                    for(String friend : friendStrings)
+                    String[] friendStrings = reader.nextLine().split(SEPERATOR_EXPR, friendsSize+1);
+                    for(String friend : friendStrings) {
+                        if(friend.equals(""))
+                            break;
                         FBsystem.users.get(id).friends.add(Integer.parseInt(friend));
+                    }
                 }
                 else
                     reader.nextLine();
                     
                 if(postsSize != 0) {
-                    String[] postStrings = reader.nextLine().split(SEPERATOR_EXPR, postsSize);
-                    for(String currPost : postStrings)
+                    String[] postStrings = reader.nextLine().split(SEPERATOR_EXPR, postsSize+1);
+                    for(String currPost : postStrings) {
+                        if(currPost.equals(""))
+                            break;
                         FBsystem.users.get(id).posts.pushBack(Integer.parseInt(currPost));
+                    }
                 }
                 else
                     reader.nextLine();
                     
                     if(convosSize != 0) {
-                        String[] convoStrings = reader.nextLine().split(SEPERATOR_EXPR, convosSize);
-                        for(String convo : convoStrings)
+                        String[] convoStrings = reader.nextLine().split(SEPERATOR_EXPR, convosSize+1);
+                        for(String convo : convoStrings) {
+                            if(convo.equals(""))
+                                break;
                             FBsystem.users.get(id).userConvs.add(Long.parseLong(convo));
+                        }
                     }
                     else
                         reader.nextLine();
 
                     if(feedSize != 0) {
-                        String[] feedStrings = reader.nextLine().split(SEPERATOR_EXPR, feedSize);
-                        for(String currFeed : feedStrings)
-                            FBsystem.users.get(id).posts.pushBack(Integer.parseInt(currFeed));
+                        String[] feedStrings = reader.nextLine().split(SEPERATOR_EXPR, feedSize+1);
+                        for(String currFeed : feedStrings) {
+                            if(currFeed.equals(""))
+                                break;
+                            FBsystem.users.get(id).feed.pushBack(Integer.parseInt(currFeed));
+                        }
                     }
                     else
                         reader.nextLine();
@@ -345,19 +378,25 @@ public abstract class FileHandler {
             //conversations
             file = new File(FILES_PATH + CONVERSATIONS_FILE);
             reader = new Scanner(file);
-            int conversationsCount = Integer.parseInt(reader.nextLine());
+            int conversationsCount = 0;
+            if(reader.hasNext())
+                conversationsCount = Integer.parseInt(reader.nextLine());
             for(int i = 0; i < conversationsCount; i++) {
                 String[] mainDetails = reader.nextLine().split(SEPERATOR_EXPR, 3);
+                String convoName = reader.nextLine();
                 long id = Long.parseLong(mainDetails[0]);
                 int participantsCount = Integer.parseInt(mainDetails[1]);
                 int msgCount = Integer.parseInt(mainDetails[2]);
                 
                 Vector<Integer> participants = new Vector<Integer>(participantsCount+1);
-                String[] participantStrings = reader.nextLine().split(SEPERATOR_EXPR, participantsCount);
-                for(String participant : participantStrings)
+                String[] participantStrings = reader.nextLine().split(SEPERATOR_EXPR, participantsCount+1);
+                for(String participant : participantStrings) {
+                    if(participant.equals(""))
+                        break;
                     participants.add(Integer.parseInt(participant));
+                }
 
-                FBsystem.conversations.put(id, new Conversation(participants));
+                FBsystem.conversations.put(id, new Conversation(participants,convoName));
 
                 for(int j = 0; j < msgCount; j++) {
                     String[] messageDetails = reader.nextLine().split(SEPERATOR_EXPR);
@@ -366,7 +405,6 @@ public abstract class FileHandler {
                     FBsystem.conversations.get(id).messages.put(msg.getMessageID(), msg);
                 }
             }
-        }
     }
 
     public static void clearDB() throws IOException {

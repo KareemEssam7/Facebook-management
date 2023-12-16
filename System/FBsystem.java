@@ -4,6 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import java.util.regex.Pattern;
+import CustomStructures.Trie;
 
 
 public abstract class FBsystem {
@@ -43,7 +44,7 @@ public abstract class FBsystem {
     }
 
     // check if name is valid
-    private static boolean validName(String name) {
+    public static boolean validName(String name) {
         return patternMatches(name, nameConstraints);
     }
 
@@ -53,6 +54,7 @@ public abstract class FBsystem {
     // 2: Invalid/Weak Password.
     // 3: Invalid Name
     // 4: E-mail already taken.
+    // 5: Username already taken.
     // -2: Hashing Error! Algorithm Undefined.
     public static byte Register(String email, String name, String password, char gender, String birthdate) {
         if (!validEmail(email))
@@ -61,13 +63,13 @@ public abstract class FBsystem {
             return 2;
         if (!validName(name))
             return 3;
+        if(Trie.search_user(name) != -1)
+            return 5;
         if (!accounts.containsKey(email)) {
             String hashedPassword = hashString(password);
             if(hashedPassword == null)
                 return -2;
-            user newUser = new user(email, name, hashedPassword, gender, birthdate);
-            users.put(newUser.getId(), newUser);
-            accounts.put(email, newUser.getId());
+            new user(email, name, hashedPassword, gender, birthdate);
             return 0;
         }
 

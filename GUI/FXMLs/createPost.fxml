@@ -37,10 +37,11 @@
                   <ToggleGroup fx:id="privacySettings" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton focusTraversable="false" mnemonicParsing="false" text="Friends Only" toggleGroup="$privacySettings" />
+            <RadioButton focusTraversable="false" mnemonicParsing="false" text="Friends" toggleGroup="$privacySettings" />
+            <RadioButton focusTraversable="false" mnemonicParsing="false" text="Non-restricted" toggleGroup="$privacySettings"/>
          </children>
          <VBox.margin>
-            <Insets bottom="10.0" left="25.0" right="25.0" top="25.0" />
+            <Insets bottom="10.0" left="20.0" right="20.0" top="25.0" />
          </VBox.margin>
       </HBox>
       <TextArea fx:id="inputField" focusTraversable="false" prefHeight="150.0" prefWidth="349.0" promptText="Enter post content" wrapText="true" VBox.vgrow="ALWAYS">

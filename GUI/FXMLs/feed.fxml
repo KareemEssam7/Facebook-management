@@ -8,70 +8,76 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="windowPane" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FeedController">
-   <top>
-      <HBox fx:id="barHBox" alignment="CENTER" prefHeight="60.0" style="-fx-background-color: #415a77; -fx-spacing: 10;" BorderPane.alignment="CENTER">
-         <children>
-            <TextField fx:id="searchBar" focusTraversable="false" promptText="Search" />
-            <Button fx:id="searchButton" focusTraversable="false" mnemonicParsing="false" text="Search" />
-            <Pane fx:id="whiteSpacePane" prefHeight="100.0" prefWidth="280.0" />
-            <Button fx:id="logoutButton" focusTraversable="false" mnemonicParsing="false" text="Logout" />
-         </children>
-      </HBox>
-   </top>
-   <left>
-      <ScrollPane fx:id="searchScrollPane" focusTraversable="false" hbarPolicy="NEVER" prefHeight="664.0" prefWidth="280.0" style="-fx-background-color: TRANSPARENT; -fx-background: #778da9;" BorderPane.alignment="CENTER">
-         <content>
-            <VBox fx:id="searchVBox" alignment="CENTER" style="-fx-background-color: TRANSPARENT; -fx-spacing: 20;">
-               <padding>
-                  <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
-               </padding>
-            </VBox>
-         </content>
-      </ScrollPane>
-   </left>
-   <center>
-      <ScrollPane fx:id="postsScrollpane" focusTraversable="false" hbarPolicy="NEVER" prefHeight="220.0" prefWidth="732.0" style="-fx-background-color: TRANSPARENT; -fx-background: #e9ecef; -fx-hbar-policy: NEVER;" BorderPane.alignment="CENTER">
-         <content>
-            <VBox fx:id="postsVBox" alignment="TOP_CENTER" style="-fx-spacing: 20; -fx-background-color: TRANSPARENT;">
-               <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </padding>
-            </VBox>
-         </content>
-      </ScrollPane>
-   </center>
-   <right>
-      <BorderPane fx:id="conversationsPane" prefHeight="200.0" prefWidth="280.0" style="-fx-background-color: #778da9;" BorderPane.alignment="CENTER">
-         <center>
-            <ScrollPane fx:id="messagesScrollPane" focusTraversable="false" hbarPolicy="NEVER" prefHeight="601.0" prefWidth="280.0" style="-fx-background-color: TRANSPARENT; -fx-background: #778da9;" BorderPane.alignment="CENTER">
+<StackPane fx:id="windowStack" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FeedController">
+   <children>
+      <BorderPane fx:id="windowPane" prefHeight="720.0" prefWidth="1280.0">
+         <top>
+            <HBox fx:id="barHBox" alignment="CENTER" prefHeight="60.0" style="-fx-background-color: #415a77; -fx-spacing: 10;" BorderPane.alignment="CENTER">
+               <children>
+                  <TextField fx:id="searchBar" focusTraversable="false" promptText="Search" />
+                  <Button fx:id="searchButton" focusTraversable="false" mnemonicParsing="false" text="Search" />
+                  <Pane fx:id="whiteSpacePane" prefHeight="100.0" prefWidth="280.0" />
+                  <Button fx:id="homeButton" focusTraversable="false" mnemonicParsing="false" onAction="#goHome" text="Home" />
+                  <Button fx:id="logoutButton" focusTraversable="false" mnemonicParsing="false" text="Logout" />
+               </children>
+            </HBox>
+         </top>
+         <left>
+            <ScrollPane fx:id="searchScrollPane" focusTraversable="false" hbarPolicy="NEVER" prefHeight="664.0" prefWidth="280.0" style="-fx-background-color: TRANSPARENT; -fx-background: #778da9;" BorderPane.alignment="CENTER">
                <content>
-                  <VBox fx:id="messagesVBox" alignment="CENTER" style="-fx-background-color: TRANSPARENT; -fx-spacing: 20;">
+                  <VBox fx:id="searchVBox" alignment="CENTER" style="-fx-background-color: TRANSPARENT; -fx-spacing: 20;">
                      <padding>
                         <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
                      </padding>
                   </VBox>
                </content>
             </ScrollPane>
+         </left>
+         <center>
+            <ScrollPane fx:id="postsScrollpane" focusTraversable="false" hbarPolicy="NEVER" prefHeight="220.0" prefWidth="732.0" style="-fx-background-color: TRANSPARENT; -fx-background: #e9ecef; -fx-hbar-policy: NEVER;" BorderPane.alignment="CENTER">
+               <content>
+                  <VBox fx:id="postsVBox" alignment="TOP_CENTER" style="-fx-spacing: 20; -fx-background-color: TRANSPARENT;">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                  </VBox>
+               </content>
+            </ScrollPane>
          </center>
-         <top>
-            <VBox alignment="CENTER" spacing="5.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Label text="Conversations">
-                     <font>
-                        <Font name="Century Gothic" size="22.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="createConversationButton" focusTraversable="false" mnemonicParsing="false" text="Create Conversation" />
-               </children>
-               <BorderPane.margin>
-                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-               </BorderPane.margin>
-            </VBox>
-         </top>
+         <right>
+            <BorderPane fx:id="conversationsPane" prefHeight="200.0" prefWidth="280.0" style="-fx-background-color: #778da9;" BorderPane.alignment="CENTER">
+               <center>
+                  <ScrollPane fx:id="messagesScrollPane" focusTraversable="false" hbarPolicy="NEVER" prefHeight="601.0" prefWidth="280.0" style="-fx-background-color: TRANSPARENT; -fx-background: #778da9;" BorderPane.alignment="CENTER">
+                     <content>
+                        <VBox fx:id="messagesVBox" alignment="CENTER" style="-fx-background-color: TRANSPARENT; -fx-spacing: 20;">
+                           <padding>
+                              <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                           </padding>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+               </center>
+               <top>
+                  <VBox alignment="CENTER" spacing="5.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label text="Conversations">
+                           <font>
+                              <Font name="Century Gothic" size="22.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="createConversationButton" focusTraversable="false" mnemonicParsing="false" text="Create Conversation" />
+                     </children>
+                     <BorderPane.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </BorderPane.margin>
+                  </VBox>
+               </top>
+            </BorderPane>
+         </right>
       </BorderPane>
-   </right>
-</BorderPane>
+   </children>
+</StackPane>
