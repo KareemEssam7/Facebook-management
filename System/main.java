@@ -55,14 +55,6 @@ class main {
         // tmp3.LeaveConversation(1L);
         // System.out.println(FBsystem.conversations.size());
         // testcommit123
-        user amany = new user("amany@gmail.com", "amany", "amany123", 'F', "1/1/1");
-        user ayman = new user("ayman@gmail.com", "ayman", "ayman123", 'M', "2/2/2");
-        user jiangly = new user("chinese@gmail.com", "chinese ", "chinese123", 'M', "3/3/3");
-        user khater = new user("khater@gmail.com", "khater", "khater123", 'M', "4/4/4");
-        user wisdom = new user("FraudHatem@gmail.com", "kareem", "kareem123", 'M', "5/5/5");
-        user joon = new user("joon@gmail.com", "yehia", "yehia123", 'D', "6/6/6");
-        user kareem = new user("kareemessam@gmail.com", "kareem", "kareem123", 'M', "7/7/7");
-        user mahrous = new user("mahrousElNayem", "Mahrous", "Mahrous123", 'L', "8/8/8");
 
         // jiangly.addFriend(ayman);
         // jiangly.addFriend(khater);
@@ -103,6 +95,14 @@ class main {
         // vc=Trie.search("A");
         // System.out.println(vc.get(0));
         // System.out.println(vc.get(1));
+        user amany = new user("amany@gmail.com", "amany", "amany123", 'F', "1/1/1");
+        user ayman = new user("ayman@gmail.com", "ayman", "ayman123", 'M', "2/2/2");
+        user jiangly = new user("chinese@gmail.com", "chinese ", "chinese123", 'M', "3/3/3");
+        user khater = new user("khater@gmail.com", "khater", "khater123", 'M', "4/4/4");
+        user wisdom = new user("FraudHatem@gmail.com", "kareem", "kareem123", 'M', "5/5/5");
+        user joon = new user("joon@gmail.com", "yehia", "yehia123", 'D', "6/6/6");
+        user kareem = new user("kareemessam@gmail.com", "kareem", "kareem123", 'M', "7/7/7");
+        user mahrous = new user("mahrousElNayem", "Mahrous", "Mahrous123", 'L', "8/8/8");
         jiangly.addFriend(ayman);
         jiangly.addFriend(khater);
         jiangly.addFriend(amany);
@@ -138,6 +138,13 @@ class main {
         } catch (IOException e) {
             System.out.println("FAIL");
         }
-
+        Vector<Integer> t = new Vector<Integer>();
+        t.add(kareem.getId());
+        khater.CreatePost("I love segment tree",'+',t);
+        
+        Vector<Integer> ids = new Vector<Integer>();
+        ids.add(ayman.getId());
+        ids.add(mahrous.getId());
+        ayman.CreatePost("string",'+',ids);
     }
 }

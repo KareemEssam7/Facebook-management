@@ -1,15 +1,15 @@
 package System;
 
-import java.io.*;
 import java.util.*;
 
 // Post , Comment,  Reply
 abstract class Action {
     // id of the action
-    public final int id, linesCount;
+    protected final int id;
+    protected int linesCount;
     // id of the poster / commenter / replier
-    public final int userId;
-    Set<Integer> ReactorsID = new HashSet<Integer>();
+    protected final int userId;
+    public Set<Integer> ReactorsID = new HashSet<Integer>();
     public String content;
 
     protected Action(int id, String content, int userId) {
@@ -21,6 +21,18 @@ abstract class Action {
 
     public String getContent() {
         return content;
-
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getLinesCount() {
+        return linesCount;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+    
 }

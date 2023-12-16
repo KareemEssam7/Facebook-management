@@ -1,11 +1,7 @@
 package System;
 import java.io.*;
-import java.util.*;
-
-import CustomStructures.*;
-import System.Action;
 public class Reply extends Action {
-    static int id2 = 0;
+    public static int id2 = 0;
 
     Reply(String msg, int userId) {
         super(id2, msg, userId);

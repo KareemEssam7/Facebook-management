@@ -1,14 +1,12 @@
 package System;
-import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import java.util.regex.Pattern;
 
-import CustomStructures.*;
 
-public class FBsystem {
+public abstract class FBsystem {
     // id and user
     public static HashMap<Integer, user> users = new HashMap<Integer, user>();
     public static HashMap<Long, Conversation> conversations = new HashMap<Long, Conversation>();
@@ -16,7 +14,7 @@ public class FBsystem {
     public static HashMap<Integer, Post> posts = new HashMap<Integer, Post>();
     private final static String emailConstraints = "^(?=.{1,64}@)[A-Za-z\\d_-]+(\\.[A-Za-z\\d_-]+)*@[A-Za-z\\d][A-Za-z\\d-]+(\\.[A-Za-z\\d-]+)*(\\.[A-Za-z]{2,})$";
     private final static String passwordConstraints = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*\\p{Punct})[A-Za-z\\d\\p{Punct}]{8,32}$";
-    private final static String nameConstraints = "^[A-Za-z]{3,10}(\\s [A-Za-z]{3,10})?$";
+    private final static String nameConstraints = "^[A-Za-z][A-Za-z\\d_]{3,20}$";
     public static user CurUser = null;
     // function to hash strings using sha3-256 and returns it as a base-64 string.
     public static String hashString(String stringToHash) {

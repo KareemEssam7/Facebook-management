@@ -1,12 +1,12 @@
 package System;
 import java.io.*;
-import java.util.*;
 
 import CustomStructures.*;
 
 public class comment extends Action {
-    static int id2 = 0;
+    public static int id2 = 0;
     public JoinedList<Reply> Replies = new JoinedList<Reply>();
+    
     comment(String msg,int userId) {
         super(id2, msg, userId);
         id2++;

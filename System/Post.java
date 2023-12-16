@@ -5,9 +5,9 @@ import java.util.*;
 import CustomStructures.*;
 
 public class Post extends Action {
-    static int postID = 0;
-    char privacy;
-    Set<Integer> TaggedId = new HashSet<Integer>();
+    public static int postID = 0;
+    private char privacy;
+    public Set<Integer> TaggedId = new HashSet<Integer>();
     public JoinedList<comment> Comments = new JoinedList<comment>();
     Post(String msg, char priv, int userId, Vector<Integer> TaggedId) {
         super(postID, msg, userId);
@@ -55,6 +55,14 @@ public class Post extends Action {
                 it.value().saveData(new FileWriter(FileHandler.FILES_PATH + FileHandler.COMMENTS_FILE, true), SEPERATOR);
             }
 
+     }
+
+     public char getPrivacy() {
+         return privacy;
+     }
+
+     public void setPrivacy(char privacy) {
+         this.privacy = privacy;
      }
 
 }

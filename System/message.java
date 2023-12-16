@@ -1,12 +1,8 @@
 package System;
-import java.io.*;
-import java.util.*;
-
-import CustomStructures.*;
 public class message {
-    final int senderID;
-    final long messageID;
-    String content;
+    private final int senderID;
+    private final long messageID;
+    public String content;
     message(String content,int senderID,long conversationId){
         this.content = content;
         this.senderID = senderID;
@@ -18,5 +14,13 @@ public class message {
         this.senderID = senderID;
         FBsystem.conversations.get(conversationId).messagesCnt++;
         this.messageID = messageID;
+    }
+
+    public int getSenderID() {
+        return senderID;
+    }
+
+    public long getMessageID() {
+        return messageID;
     }
 }
