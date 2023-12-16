@@ -1,16 +1,13 @@
 package System;
 
-import java.io.*;
 import java.util.*;
 
-import CustomStructures.*;
-
 public class Conversation {
-    static long id = 0;
-    long uniqueID;
+    public static long id = 0;
+    private long uniqueID;
 
-    HashMap<Long, message> messages = new HashMap<Long, message>();
-    Set<Integer> participantsID = new HashSet<Integer>();
+    public HashMap<Long, message> messages = new HashMap<Long, message>();
+    public Set<Integer> participantsID = new HashSet<Integer>();
     long messagesCnt;
 
     Conversation(Vector<Integer> par) {
@@ -37,5 +34,12 @@ public class Conversation {
 
     void addParticipants(Vector<user> v) {
 
+    }
+    public long getUniqueID() {
+        return uniqueID;
+    }
+
+    public long getMessagesCnt() {
+        return messagesCnt;
     }
 }

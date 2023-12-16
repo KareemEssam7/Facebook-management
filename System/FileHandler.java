@@ -2,9 +2,7 @@ package System;
 import java.io.*;
 import java.util.*;
 
-import CustomStructures.*;
-
-public class FileHandler {
+public abstract class FileHandler {
     public final static String FILES_PATH = new String(".\\Facebook-management\\Database\\");
     public final static String USERS_FILE = new String("users.data");
     public final static String POSTS_FILE = new String("posts.data");
@@ -65,12 +63,12 @@ public class FileHandler {
             user currUser = userData.getValue();
             
             writer.write(currUser.getId() + SEPERATOR);
-            writer.write(currUser.name + SEPERATOR);
-            writer.write(currUser.email + SEPERATOR);
+            writer.write(currUser.getName() + SEPERATOR);
+            writer.write(currUser.getEmail() + SEPERATOR);
             currUser.savePassword(writer);
             writer.write(SEPERATOR);
-            writer.write(currUser.Birthdate + SEPERATOR);
-            writer.write(currUser.gender + SEPERATOR);
+            writer.write(currUser.getBirthdate() + SEPERATOR);
+            writer.write(currUser.getGender() + SEPERATOR);
             writer.write(currUser.restrictedUsers.cardinality() + SEPERATOR);
             writer.write(currUser.blockedUsers.cardinality() + SEPERATOR);
             writer.write(currUser.friends.size() + SEPERATOR);
@@ -127,7 +125,7 @@ public class FileHandler {
         writer.write(Conversation.id + "\n");
         for(Map.Entry<Long, Conversation> conversation : FBsystem.conversations.entrySet()) {
             Conversation currConversation = conversation.getValue();
-            writer.write(currConversation.uniqueID + SEPERATOR);
+            writer.write(currConversation.getUniqueID() + SEPERATOR);
             writer.write(currConversation.participantsID.size() + SEPERATOR);
             writer.write(currConversation.messagesCnt + "\n");
 
@@ -142,8 +140,8 @@ public class FileHandler {
 
             for(Map.Entry<Long, message> Message : currConversation.messages.entrySet()) {
                 message currMessage = Message.getValue();
-                writer.write(currMessage.messageID + SEPERATOR);
-                writer.write(currMessage.senderID + SEPERATOR);
+                writer.write(currMessage.getMessageID() + SEPERATOR);
+                writer.write(currMessage.getSenderID() + SEPERATOR);
                 writer.write((FBsystem.charCount('\n', currMessage.content)+1) + "\n");
 
                 writer.write(currMessage.content + "\n");
@@ -365,7 +363,7 @@ public class FileHandler {
                     String[] messageDetails = reader.nextLine().split(SEPERATOR_EXPR);
                     String content = multiString(reader, Integer.parseInt(messageDetails[2]));
                     message msg = new message(content, Integer.parseInt(messageDetails[1]), id, Integer.parseInt(messageDetails[0]));
-                    FBsystem.conversations.get(id).messages.put(msg.messageID, msg);
+                    FBsystem.conversations.get(id).messages.put(msg.getMessageID(), msg);
                 }
             }
         }

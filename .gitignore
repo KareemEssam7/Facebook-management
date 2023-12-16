@@ -2,6 +2,7 @@ Action.class
 comment.class
 Conversation.class
 FBsystem.class
+FileHandler.class
 main.class
 message.class
 Post.class
@@ -9,4 +10,3 @@ Reply.class
 user.class
 CustomStructures/JoinedList.class
 CustomStructures/Node.class
-FileHandler.class

@@ -33,9 +33,9 @@ public class networkNavigation {
 
     private int userID;
 
-    TreeMap<Integer, Integer> level = new TreeMap<>();
+    private TreeMap<Integer, Integer> level = new TreeMap<>();
 
-    Set<Integer> currUserFriends;
+    private Set<Integer> currUserFriends;
 
     public networkNavigation(int userId) {
 
