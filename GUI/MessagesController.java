@@ -1,7 +1,7 @@
 package GUI;
 
 import java.io.IOException;
-
+import System.FBsystem;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
@@ -11,6 +11,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import CustomStructures.*;
 
 public class MessagesController {
     @FXML
@@ -50,7 +51,7 @@ public class MessagesController {
         container.closeChat();
     }
 
-    public void addMessage(String username, String body) throws IOException{
+    public void addMessage(Long msgId, Long convId ,String body) throws IOException{
         FXMLLoader loader;
         if(username != null){
             loader = new FXMLLoader(getClass().getResource("FXMLs/recievedMessage.fxml"));
@@ -59,10 +60,8 @@ public class MessagesController {
             loader = new FXMLLoader(getClass().getResource("FXMLs/sentMessage.fxml")); // not made yet
         HBox createMessage = loader.load();
         MessageController controller = loader.getController();
-        controller.setContent(username, body);
-
+        controller.setContent(msgId, convId, body);
         messageVBox.getChildren().add(createMessage);
-        
     }
 
 }

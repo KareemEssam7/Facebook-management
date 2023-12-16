@@ -7,6 +7,7 @@ import System.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.text.Text;
@@ -47,7 +48,8 @@ public class RegisterController {
             String email = emailField.getText();
             String password = passwordField.getText();
             String confirmPassword = ConfirmPasswordField.getText();
-            String genderString = gender.getSelectedToggle().toString();
+            RadioButton selection = (RadioButton)gender.getSelectedToggle();
+            String genderString = selection.getText();
             char Gender = genderString.charAt(0);
             String Date = Birthdate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             if(!password.equals(confirmPassword))

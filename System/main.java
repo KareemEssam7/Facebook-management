@@ -106,6 +106,12 @@ class main {
         jiangly.addFriend(ayman);
         jiangly.addFriend(khater);
         jiangly.addFriend(amany);
+        kareem.block(ayman.getId());
+        ayman.block(kareem.getId());//:(  
+            //bro
+            //ayman incident 2 agreed
+            // its too powerful
+     
         ayman.addFriend(amany);
         khater.addFriend(amany);
         amany.addFriend(wisdom);
@@ -128,7 +134,7 @@ class main {
         convo.add(jiangly.getId());
         convo.add(mahrous.getId());
 
-        jiangly.MakeConversation(convo);
+        jiangly.MakeConversation(convo,"Graph practise");
         jiangly.SendMessage("I hate Mahrous", jiangly.userConvs.iterator().next());
         try {
             FileHandler.load();

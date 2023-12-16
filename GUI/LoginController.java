@@ -29,9 +29,12 @@ public class LoginController {
     private void loginButtonAction(ActionEvent event) throws IOException {
         String username = emailField.getText();
         String password = passwordField.getText();
-        if (FBsystem.Login(username, password) < 0) {
+        int userId = FBsystem.Login(username, password);
+        if (userId < 0) {
             errorsText.setText("Wrong email or password");
         } else {
+            FBsystem.CurUser = FBsystem.users.get(userId);
+            
             GoToFeed(event);
         }
     }
@@ -49,11 +52,11 @@ public class LoginController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLs/feed.fxml"));
         Parent root = loader.load();
         FeedController Controller = loader.getController();
-
+        Controller.init();
+        Controller.setContent();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
 
-        Controller.init();
 
         stage.setScene(scene);
         stage.show();

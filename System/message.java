@@ -1,4 +1,5 @@
 package System;
+
 public class message {
     private final int senderID;
     private final long messageID;
@@ -8,6 +9,7 @@ public class message {
         this.senderID = senderID;
         FBsystem.conversations.get(conversationId).messagesCnt++;
         this.messageID = FBsystem.conversations.get(conversationId).messagesCnt;
+        FBsystem.conversations.get(conversationId).messagesId.pushBack(this.messageID);
     }
     message(String content,int senderID,long conversationId, int messageID){
         this.content = content;
