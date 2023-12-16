@@ -46,7 +46,7 @@ public class FeedController {
     ScrollPane postsScrollpane;
     @FXML
     VBox postsVBox;
-
+    
     BorderPane messages = null;
     MessagesController messagesController = null;
 
@@ -81,7 +81,7 @@ public class FeedController {
         VBox post = loader.load();
         PostController controller = loader.getController();
 
-        controller.setContent(username, body);
+        controller.init(username, body, this);
 
         postsVBox.getChildren().add(post);
     }
