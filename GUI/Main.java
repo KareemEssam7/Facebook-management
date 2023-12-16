@@ -12,7 +12,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLs/feed.fxml"));
         Parent root = loader.load();
-        GUI.FeedController feed = loader.getController();
+        FeedController feed = loader.getController();
 
         feed.init();
 
