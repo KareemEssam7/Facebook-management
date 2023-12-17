@@ -25,55 +25,85 @@ public class ProfileController {
     @FXML
     VBox profileFeed;
 
+    int Userid;
     FeedController feedController;
 
-    public void init(String username, FeedController feedController) throws IOException{
-
+    public void init(int Userid, FeedController feedController) throws IOException{
+        this.Userid = Userid;
         this.feedController = feedController;
 
         profileVBox.prefWidthProperty().bind(feedController.postsScrollpane.widthProperty().subtract(10));
 
-        this.username.setText(username);
+        this.username.setText(FBsystem.users.get(Userid).getName());
 
-        //add profile posts here
-        
-        for( Node<Integer> it = FBsystem.CurUser.feed.iteratorToStart(); it != null; it = FBsystem.CurUser.feed.nextValue()) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLs/post.fxml"));
-            VBox post = loader.load();
-            PostController controller = loader.getController();
-            controller.init(FBsystem.posts.get(it.value()),feedController);
-            profileFeed.getChildren().add(post); 
+        if(Userid == FBsystem.CurUser.getId()){
+            friendButton.setVisible(false);
+            restrictButton.setVisible(false);
+            blockButton.setVisible(false);
         }
+            
 
-        // FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLs/post.fxml"));
-        // VBox post = loader.load();
-        // PostController controller = loader.getController();
-        // controller.init(username, "Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2.", feedController);
-        // profileFeed.getChildren().add(post);
+        if(FBsystem.CurUser.friends.contains(Userid))
+            friendButton.setText("Remove Friend");
+        else
+            friendButton.setText("Add Friend");
 
-        // FXMLLoader load = new FXMLLoader(getClass().getResource("FXMLs/post.fxml"));
-        // VBox post2 = load.load();
-        // PostController controller2 = load.getController();
-        // controller2.init(username, "Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2.", feedController);
-        // profileFeed.getChildren().add(post2);
+        if(FBsystem.CurUser.restrictedUsers.get(Userid))
+            restrictButton.setText("Unrestrict");
+        else
+            restrictButton.setText("Restrict");
 
-        // FXMLLoader load3 = new FXMLLoader(getClass().getResource("FXMLs/post.fxml"));
-        // VBox post23 = load3.load();
-        // PostController controller23 = load3.getController();
-        // controller23.init(username, "Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2Meow2.", feedController);
-        // profileFeed.getChildren().add(post23);
+        if(FBsystem.CurUser.blockedUsers.get(Userid))
+            blockButton.setText("Unblock");
+        else
+            blockButton.setText("Block");
 
+        user profileUser = FBsystem.users.get(Userid);
+        profileUser.posts.setReversedIteration(true);
+        for(Node<Integer> it = profileUser.posts.iteratorToStart(); it != null; it = profileUser.posts.nextValue()) {
+            Post temp = FBsystem.posts.get(it.value());
+            if(temp.getPrivacy() == '+' || temp.getPrivacy() == '#' && FBsystem.CurUser.friends.contains(Userid)
+                || temp.getPrivacy() == '-' && !profileUser.restrictedUsers.get(FBsystem.CurUser.getId())) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLs/post.fxml"));
+                VBox post = loader.load(); 
+                PostController controller = loader.getController();
+                controller.init(FBsystem.posts.get(it.value()), feedController);
+                profileFeed.getChildren().add(post);
+            }
+        }
+        profileUser.posts.setReversedIteration(false);
     }
     @FXML
     private void friendButtonPressed(){
-
+        if(FBsystem.CurUser.friends.contains(Userid)){
+            FBsystem.CurUser.removeFriend(Userid);
+            friendButton.setText("Add Friend");
+        }
+        else{
+             FBsystem.CurUser.addFriend(FBsystem.users.get(Userid));
+             friendButton.setText("Remove Friend");
+        }
     }
     @FXML
     private void restrictButtonPressed(){
-
+         if(FBsystem.CurUser.restrictedUsers.get(Userid)){
+            FBsystem.CurUser.unrestrictUser(Userid);
+            restrictButton.setText("Restrict");
+        }
+        else{
+             FBsystem.CurUser.restrictUser(Userid);
+             restrictButton.setText("Unrestrict");
+        }
     }
     @FXML
     private void blockButtonPressed(){
-
+        if(FBsystem.CurUser.restrictedUsers.get(Userid)){
+            FBsystem.CurUser.unblock(Userid);
+            restrictButton.setText("Block");
+        }
+        else{
+             FBsystem.CurUser.block(Userid);
+             restrictButton.setText("Unblock");
+        }
     }
 }

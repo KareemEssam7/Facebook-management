@@ -22,7 +22,7 @@
                   <Font size="14.0" />
                </font>
             </TextArea>
-            <Button fx:id="sendButton" focusTraversable="false" mnemonicParsing="false" text="Send" />
+            <Button fx:id="sendButton" focusTraversable="false" mnemonicParsing="false" text="Send" onAction="#sendPressed" />
          </children>
       </HBox>
    </bottom>

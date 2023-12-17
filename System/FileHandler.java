@@ -403,6 +403,7 @@ public abstract class FileHandler {
                     String content = multiString(reader, Integer.parseInt(messageDetails[2]));
                     message msg = new message(content, Integer.parseInt(messageDetails[1]), id, Integer.parseInt(messageDetails[0]));
                     FBsystem.conversations.get(id).messages.put(msg.getMessageID(), msg);
+                    FBsystem.conversations.get(id).messagesId.pushBack(msg.getMessageID());
                 }
             }
     }

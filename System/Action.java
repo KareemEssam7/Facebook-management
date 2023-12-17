@@ -19,6 +19,8 @@ abstract class Action {
         linesCount = FBsystem.charCount('\n', content) + 1;
     }
 
+    public abstract void showContent();
+
     public String getContent() {
         return content;
     }

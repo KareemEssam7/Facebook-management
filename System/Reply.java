@@ -34,4 +34,15 @@ public class Reply extends Action {
            writer.write("\n");
            writer.close();
      }
+
+     @Override
+     public void showContent() {
+        System.out.println(FBsystem.users.get(userId).getName());
+        System.out.println(content);
+        System.out.println("Reactors: ");
+        for(Integer it : ReactorsID) {
+           System.out.print(FBsystem.users.get(it).getName() + " ");
+       }
+       System.out.println("");
+     }
 }
