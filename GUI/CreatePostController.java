@@ -55,6 +55,9 @@ public class CreatePostController {
 
         char privacy;
         RadioButton selection = (RadioButton)privacySettings.getSelectedToggle();
+        if(selection == null) {
+            return;
+        }
         switch (selection.getText().charAt(0)) {
             case 'P':
                 privacy = '+';
@@ -68,6 +71,9 @@ public class CreatePostController {
                 break;
         }
         String content = inputField.getText();
+        if(content == "") {
+            return;
+        }
         Vector<Integer> taggedUsers = new Vector<Integer>();
 
         fillTags(taggedUsers, content);

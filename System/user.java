@@ -151,7 +151,7 @@ public class user {
 
     // hidden easteregg
     public void restrictUser(int userID) {
-        restrictedUsers.set(userID);
+        restrictedUsers.set(userID); 
         JoinedList<Integer> userPostList = FBsystem.users.get(userID).feed;
         Node<Integer> p = userPostList.iteratorToStart();
         while (p != null) {

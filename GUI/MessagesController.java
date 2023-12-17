@@ -1,7 +1,10 @@
 package GUI;
 
 import java.io.IOException;
+
+import System.Conversation;
 import System.FBsystem;
+import System.user;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
@@ -33,13 +36,22 @@ public class MessagesController {
     @FXML
     Button sendButton;
 
-    GUI.FeedController container;
+    Conversation convo;
+    FeedController feedController;
 
-    public void init(GUI.FeedController container) throws IOException{
-        this.container = container;
-        panel.prefHeightProperty().bind(container.searchScrollPane.heightProperty().divide(1.002));
-        messageScrollPane.prefHeightProperty().bind(container.searchScrollPane.heightProperty().subtract(topBar.heightProperty()).subtract(bottomBar.heightProperty()));
+    public void init(Conversation convo, FeedController feedController) throws IOException{
+        this.feedController = feedController;
+        this.convo = convo;
+
+        panel.prefHeightProperty().bind(feedController.searchScrollPane.heightProperty().divide(1.002));
+        messageScrollPane.prefHeightProperty().bind(feedController.searchScrollPane.heightProperty().subtract(topBar.heightProperty()).subtract(bottomBar.heightProperty()));
         messageVBox.prefWidthProperty().bind(panel.widthProperty());
+
+        username.setText(convo.convName);
+        for(Node<Long> it = convo.messagesId.iteratorToStart(); it != null; it = convo.messagesId.nextValue()) {
+            addMessage(it.value());
+            // FBsystem.conversations.get(conv).messages.get(it.value()).getMessageID(),FBsystem.conversations.get(conv).messages.get(it.value()).content
+        }
     }
 
     public void setUsername(String username){
@@ -48,20 +60,29 @@ public class MessagesController {
 
     @FXML
     public void close() throws IOException{
-        container.closeChat();
+        feedController.closeChat();
     }
 
-    public void addMessage(Long msgId, Long convId ,String body) throws IOException{
+    public void addMessage(Long msgId) throws IOException{
         FXMLLoader loader;
-        if(username != null){
+        if(convo.messages.get(msgId).getSenderID() != FBsystem.CurUser.getId()){
             loader = new FXMLLoader(getClass().getResource("FXMLs/recievedMessage.fxml"));
         }
         else
             loader = new FXMLLoader(getClass().getResource("FXMLs/sentMessage.fxml")); // not made yet
         HBox createMessage = loader.load();
         MessageController controller = loader.getController();
-        controller.setContent(msgId, convId, body);
+        controller.setContent(msgId, convo);
         messageVBox.getChildren().add(createMessage);
+    }
+
+    @FXML
+    private void sendPressed() throws IOException{
+        if(inputField.getText().length() > 0){
+            FBsystem.CurUser.SendMessage(inputField.getText(), convo.getUniqueID());
+            addMessage(convo.messagesId.getEndNode().value());
+            inputField.setText("");
+        }
     }
 
 }

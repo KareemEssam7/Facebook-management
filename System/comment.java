@@ -44,4 +44,20 @@ public class comment extends Action {
                 it.value().saveData(new FileWriter(FileHandler.FILES_PATH + FileHandler.REPLIES_FILE, true), SEPERATOR);
             }
     }
+
+    @Override
+    public void showContent() {
+        System.out.println(FBsystem.users.get(userId).getName());
+         System.out.println(content);
+         System.out.println("Reactors: ");
+         for(Integer it : ReactorsID) {
+            System.out.print(FBsystem.users.get(it).getName() + " ");
+        }
+        System.out.println("");
+        System.out.println("Repliers:");
+        for(Node<Reply> it = Replies.iteratorToStart(); it != null; it = Replies.nextValue()) {
+             System.out.print(FBsystem.users.get(it.value().getUserId()).getName() + " ");  
+         }
+         System.out.println("");
+    }
 }

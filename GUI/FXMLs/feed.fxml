@@ -22,7 +22,7 @@
                   <Button fx:id="searchButton" focusTraversable="false" mnemonicParsing="false" text="Search" />
                   <Pane fx:id="whiteSpacePane" prefHeight="100.0" prefWidth="280.0" />
                   <Button fx:id="homeButton" focusTraversable="false" mnemonicParsing="false" onAction="#goHome" text="Home" />
-                  <Button fx:id="logoutButton" focusTraversable="false" mnemonicParsing="false" text="Logout" />
+                  <Button fx:id="logoutButton" focusTraversable="false" mnemonicParsing="false" onAction="#logout" text="Logout" />
                </children>
             </HBox>
          </top>

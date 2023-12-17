@@ -65,4 +65,20 @@ public class Post extends Action {
          this.privacy = privacy;
      }
 
+     @Override
+     public void showContent() {
+         System.out.println(FBsystem.users.get(userId).getName());
+         System.out.println(content);
+         System.out.println("Reactors: ");
+         for(Integer it : ReactorsID) {
+            System.out.print(FBsystem.users.get(it).getName() + " ");
+        }
+        System.out.println("");
+        System.out.println("Commenters:");
+        for(Node<comment> it = Comments.iteratorToStart(); it != null; it = Comments.nextValue()) {
+             System.out.print(FBsystem.users.get(it.value().getUserId()).getName() + " ");  
+         }
+         System.out.println("");
+     }
+
 }

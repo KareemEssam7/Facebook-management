@@ -3,6 +3,7 @@ package GUI;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
+import System.Conversation;
 import System.FBsystem;
 
 public class MessageController {
@@ -11,13 +12,11 @@ public class MessageController {
     @FXML
     Text body;
 
-    public void setContent(Long MsgID, Long convId , String body){
+    public void setContent(Long MsgID, Conversation convo){
 
-        String userName = FBsystem.users.get(FBsystem.conversations.get(convId).messages.get(MsgID).getSenderID()).getName();
-
-        if(userName != null)
-            this.username.setText(userName);
+        if(convo.messages.get(MsgID).getSenderID() != FBsystem.CurUser.getId())
+            this.username.setText(FBsystem.users.get(convo.messages.get(MsgID).getSenderID()).getName());
         
-        this.body.setText(body);
+        this.body.setText(convo.messages.get(MsgID).content);
     }
 }

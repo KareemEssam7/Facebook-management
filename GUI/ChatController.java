@@ -12,36 +12,20 @@ public class ChatController {
     @FXML
     Hyperlink chat;
     
+    Conversation conv;
     FeedController feedController;
 
     @FXML
     public void chatPressed() throws IOException{
-        feedController.openChat(chat.getText());
+        feedController.openChat(conv);
     }
 
-    public void init(Conversation c, FeedController feedController){
-        chat.setText(FBsystem.conversations.get(c.getUniqueID()).convName);
+    public void init(Conversation conv, FeedController feedController){
+        this.feedController = feedController;
+        this.conv = conv;
+        chat.setText(FBsystem.conversations.get(conv.getUniqueID()).convName);
     }
     
-    public void loadChats(FeedController feedController,int userId) throws IOException{
-        
-        for(Long i : FBsystem.users.get(userId).userConvs){
-
-            feedController.addChat(FBsystem.conversations.get(i));
-        }
-
-    }
-
-    public void loadMessages(FeedController feedController,Long conv,Integer userId) throws IOException{
-        user curUser = FBsystem.users.get(userId);
-        Conversation cur =FBsystem.conversations.get(conv);
-        for(Node<Long> it =cur.messagesId.iteratorToStart(); it != null; it = cur.messagesId.nextValue()) {
-            feedController.addMessageToChat(it.value(), conv,cur.messages.get(it.value()).content);
-            // FBsystem.conversations.get(conv).messages.get(it.value()).getMessageID(),FBsystem.conversations.get(conv).messages.get(it.value()).content
-        }
-          
-    }
-   
     @FXML
     private void usernameHover() {
         chat.setStyle("-fx-text-fill: #0077b6; -fx-underline: false;");

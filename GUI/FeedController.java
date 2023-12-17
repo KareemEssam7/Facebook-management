@@ -2,10 +2,12 @@ package GUI;
 import java.io.IOException;
 
 import CustomStructures.Node;
-import System.FBsystem;
 import javafx.beans.binding.DoubleBinding;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.ScrollPane;
@@ -15,6 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import System.*;
 
 public class FeedController {
@@ -69,7 +72,30 @@ public class FeedController {
         // PostController controller = loader.getController();
 
         postsVBox.getChildren().add(createPost);
+
+        for(Long convo : FBsystem.CurUser.userConvs) {
+            FBsystem.conversations.get(convo);
+            FXMLLoader ConvoLoader = new FXMLLoader(getClass().getResource("FXMLs/chat.fxml"));
+            Hyperlink addConversation = ConvoLoader.load();
+            
+            ChatController convoController = ConvoLoader.getController();
+
+            convoController.init(FBsystem.conversations.get(convo), this);
+            messagesVBox.getChildren().add(addConversation);
+        }
+
     }
+
+    @FXML
+    private void logout(ActionEvent event) throws IOException{
+        FBsystem.CurUser = null;
+        Parent root = FXMLLoader.load(getClass().getResource("FXMLs/Login.fxml"));
+        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public void SetResults() throws IOException
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLs/PostsResults.fxml"));
@@ -79,12 +105,14 @@ public class FeedController {
         postsScrollpane.setContent(postsResults);
         postsScrollpane.setVvalue(postsScrollpane.getVmin());
     }
+
     public void setContent() throws IOException {
-        System.out.println("meow");
+        FBsystem.CurUser.feed.setReversedIteration(true);
         for (Node<Integer> it = FBsystem.CurUser.feed.iteratorToStart(); it != null; it = FBsystem.CurUser.feed
-                .nextValue()) {
+        .nextValue()) {
             addPost(FBsystem.posts.get(it.value()));
         }
+        FBsystem.CurUser.feed.setReversedIteration(false);
     }
 
     public void goHome(){
@@ -113,27 +141,17 @@ public class FeedController {
         messagesVBox.getChildren().add(chat);
     }
 
-    public void openChat(String username) throws IOException {
+    public void openChat(Conversation convo) throws IOException {
         postsScrollpane.prefWidthProperty().bind(windowPane.widthProperty().subtract(searchVBox.widthProperty()));
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLs/messages.fxml"));
         messages = loader.load();
         messagesController = loader.getController();
 
-        messagesController.init(this);
-        messagesController.setUsername(username);
+        messagesController.init(convo, this);
 
         windowPane.setRight(messages);
 
-        // addMessageToChat("Person #1", "test123");
-        // addMessageToChat(null, "123test");
-        // addMessageToChat(null, "test321\ntest123");
-        // addMessageToChat("Person #2", "321tset");
-    }
-
-    public void addMessageToChat(Long msgID, Long convId, String body) throws IOException {
-        messagesController.addMessage(msgID, convId, body);
-        messagesController.messageScrollPane.setVvalue(messagesController.messageScrollPane.getVmax());
     }
 
     public void closeChat() throws IOException {

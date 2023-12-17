@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -23,7 +24,11 @@ public class PostController {
     @FXML
     private Button likeButton;
     @FXML
+    Label LikesLabel;
+    @FXML
     private Button commentButton;
+    @FXML
+    Label commentsLabel;
     @FXML
     private ToggleGroup privacySettings;
 
@@ -35,11 +40,29 @@ public class PostController {
         this.post = post;
         username.setText(FBsystem.users.get(post.getUserId()).getName());
         body.setText(post.content);
+        LikesLabel.setText(post.ReactorsID.size() + " Likes");
+        if(post.ReactorsID.contains(FBsystem.CurUser.getId())){
+            likeButton.setText("Unlike");
+        }
+        commentsLabel.setText(post.Comments.getSize() + " Comments");
+
+    }
+
+    private void react(){
+        if(post.ReactorsID.contains(FBsystem.CurUser.getId())){
+            post.ReactorsID.remove(FBsystem.CurUser.getId());
+            likeButton.setText("Like");
+        }
+        else{
+            post.ReactorsID.add(FBsystem.CurUser.getId());
+            likeButton.setText("Unlike");
+        }
+        LikesLabel.setText(post.ReactorsID.size() + " Likes");
     }
 
     @FXML
     public void likePressed(){
-       post.ReactorsID.add(FBsystem.CurUser.getId());
+       react();
     }
 
     @FXML
@@ -53,7 +76,7 @@ public class PostController {
         VBox profile = loader.load();
         ProfileController controller = loader.getController();
 
-        controller.init(username.getText(), feedController);
+        controller.init(post.getUserId(), feedController);
         
         feedController.postsScrollpane.setContent(profile);
         feedController.postsScrollpane.setVvalue(feedController.postsScrollpane.getVmin());

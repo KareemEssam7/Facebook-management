@@ -46,8 +46,7 @@ public class Trie {
 
     for (level = 0; level < length; level++) {
       if (!pCrawl.children.containsKey(key.charAt(level))) {
-        Vector<Integer> Emp = new Vector<Integer>();
-        return Emp;
+        return null;
       }
       pCrawl = pCrawl.children.get(key.charAt(level));
     }
