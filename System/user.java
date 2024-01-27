@@ -18,6 +18,9 @@ public class user {
     public BitSet restrictedUsers = new BitSet();
     public BitSet blockedUsers = new BitSet();
     public JoinedList<Integer> feed = new JoinedList<Integer>();
+    public Set<Long> Pages;
+    public Set<Long> Groups;
+    public Set<Long> pagesManaged;
 
     user(String email, String name, String password, char gender, String Birthdate) {
         userCount++;
@@ -86,34 +89,30 @@ public class user {
     }
 
     public void CreatePost(String content, char privacy, Vector<Integer> TaggedId) {
-        //! [+ Public (for all users)], [# default (for all friends)] ,[- Private(for non-restricted friends)].
+        // ! [+ Public (for all users)], [# default (for all friends)] ,[- Private(for
+        // non-restricted friends)].
         Post newPost = new Post(content, privacy, id, TaggedId);
         FBsystem.posts.put(newPost.id, newPost);
         posts.pushBack(newPost.id);
-        //FeedController.addPost();
-        //get gud bro
-        for(Integer Tagged:TaggedId)
-        {
+        // FeedController.addPost();
+        // get gud bro
+        for (Integer Tagged : TaggedId) {
             FBsystem.users.get(Tagged).posts.pushBack(newPost.id);
         }
-        
-        if(newPost.getPrivacy() == '+')
-        {
-            for(Map.Entry<Integer, user> userData : FBsystem.users.entrySet())
-                FBsystem.users.get(userData.getKey()).feed.pushBack(newPost.id);
-        }
-        else if(newPost.getPrivacy() == '#')
-        {
-            for(Integer curr : friends)
-                FBsystem.users.get(curr).feed.pushBack(newPost.id);
-        }
-        else{
 
-            for(Integer curr : friends){
-    
+        if (newPost.getPrivacy() == '+') {
+            for (Map.Entry<Integer, user> userData : FBsystem.users.entrySet())
+                FBsystem.users.get(userData.getKey()).feed.pushBack(newPost.id);
+        } else if (newPost.getPrivacy() == '#') {
+            for (Integer curr : friends)
+                FBsystem.users.get(curr).feed.pushBack(newPost.id);
+        } else {
+
+            for (Integer curr : friends) {
+
                 Boolean isRestricted = restrictedUsers.get(curr);
 
-                if(isRestricted)
+                if (isRestricted)
                     continue;
 
                 FBsystem.users.get(curr).feed.pushBack(newPost.id);
@@ -127,9 +126,9 @@ public class user {
         posts.deleteNode(post);
     }
 
-    public void MakeConversation(Vector<Integer> usersID,String Name) {
+    public void MakeConversation(Vector<Integer> usersID, String Name) {
         usersID.add(this.id);
-        Conversation newconv = new Conversation(usersID,Name);
+        Conversation newconv = new Conversation(usersID, Name);
         for (int i = 0; i < usersID.size(); i++) {
             FBsystem.users.get(usersID.get(i)).userConvs.add(newconv.getUniqueID());
         }
@@ -151,7 +150,7 @@ public class user {
 
     // hidden easteregg
     public void restrictUser(int userID) {
-        restrictedUsers.set(userID); 
+        restrictedUsers.set(userID);
         JoinedList<Integer> userPostList = FBsystem.users.get(userID).feed;
         Node<Integer> p = userPostList.iteratorToStart();
         while (p != null) {
@@ -208,17 +207,15 @@ public class user {
         writer.write(password);
     }
 
-    
+    public Vector<Integer> common_Friends(int ID) {
 
-    public Vector<Integer> common_Friends(int ID){
+        Vector<Integer> common_Friends_ID = new Vector<Integer>();
 
-        Vector<Integer> common_Friends_ID=new Vector<Integer>();
-
-        for( Integer id : friends) {
-          user cur = FBsystem.users.get(id);
-          if(cur.friends.contains(ID)){
-            common_Friends_ID.add(id);
-          }
+        for (Integer id : friends) {
+            user cur = FBsystem.users.get(id);
+            if (cur.friends.contains(ID)) {
+                common_Friends_ID.add(id);
+            }
         }
 
         return common_Friends_ID;
@@ -235,7 +232,5 @@ public class user {
     public char getGender() {
         return gender;
     }
-
-    
 
 }
