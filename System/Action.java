@@ -11,6 +11,7 @@ abstract class Action {
     protected final int userId;
     public Set<Integer> ReactorsID = new HashSet<Integer>();
     public String content;
+    public int pageId = -1;
 
     protected Action(int id, String content, int userId) {
         this.id = id;
@@ -36,5 +37,5 @@ abstract class Action {
     public int getUserId() {
         return userId;
     }
-    
+
 }

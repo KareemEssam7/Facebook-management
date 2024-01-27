@@ -1,4 +1,5 @@
 package System;
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -6,17 +7,18 @@ import java.util.*;
 import java.util.regex.Pattern;
 import CustomStructures.Trie;
 
-
 public abstract class FBsystem {
     // id and user
     public static HashMap<Integer, user> users = new HashMap<Integer, user>();
     public static HashMap<Long, Conversation> conversations = new HashMap<Long, Conversation>();
     public static HashMap<String, Integer> accounts = new HashMap<String, Integer>();
     public static HashMap<Integer, Post> posts = new HashMap<Integer, Post>();
+    public static HashMap<Integer, Page> pages = new HashMap<Integer, Page>();
     private final static String emailConstraints = "^(?=.{1,64}@)[A-Za-z\\d_-]+(\\.[A-Za-z\\d_-]+)*@[A-Za-z\\d][A-Za-z\\d-]+(\\.[A-Za-z\\d-]+)*(\\.[A-Za-z]{2,})$";
     private final static String passwordConstraints = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*\\p{Punct})[A-Za-z\\d\\p{Punct}]{8,32}$";
     private final static String nameConstraints = "^[A-Za-z][A-Za-z\\d_]{3,20}$";
     public static user CurUser = null;
+
     // function to hash strings using sha3-256 and returns it as a base-64 string.
     public static String hashString(String stringToHash) {
         try {
@@ -63,11 +65,11 @@ public abstract class FBsystem {
             return 2;
         if (!validName(name))
             return 3;
-        if(Trie.search_user(name) != -1)
+        if (Trie.search_user(name) != -1)
             return 5;
         if (!accounts.containsKey(email)) {
             String hashedPassword = hashString(password);
-            if(hashedPassword == null)
+            if (hashedPassword == null)
                 return -2;
             new user(email, name, hashedPassword, gender, birthdate);
             return 0;
@@ -76,14 +78,15 @@ public abstract class FBsystem {
         return 4;
     }
 
-    // allows currently registered users to login, reutrns the user id if the login was successful
-    //-1 when email/password don't match.
-    //-2 Hashing Error, Algorithm Not Found
+    // allows currently registered users to login, reutrns the user id if the login
+    // was successful
+    // -1 when email/password don't match.
+    // -2 Hashing Error, Algorithm Not Found
     public static int Login(String email, String password) {
         if (!accounts.containsKey(email))
             return -1;
         String hashedPassword = hashString(password);
-        if(hashedPassword == null)
+        if (hashedPassword == null)
             return -2;
         if (users.get(accounts.get(email)).comparePassword(hashedPassword)) {
             return users.get(accounts.get(email)).getId();
@@ -91,11 +94,11 @@ public abstract class FBsystem {
             return -1;
     }
 
-    //counts how much the character 'c' have occured
+    // counts how much the character 'c' have occured
     public static int charCount(char c, String s) {
         int ctr = 0;
-        for(int i = 0; i < s.length(); i++) {
-            if(s.charAt(i) == c)
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == c)
                 ctr++;
         }
         return ctr;
